@@ -13,22 +13,17 @@
 
 :root {
 
-    --text: #ffffff;
+    --safe-top: env(safe-area-inset-top, 0px);
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+
+    --white:
+        rgba(255,255,255,0.92);
 
     --muted:
-        rgba(255,255,255,0.63);
+        rgba(255,255,255,0.62);
 
     --glass-border:
-        rgba(255,255,255,0.25);
-
-    --safe-top:
-        env(safe-area-inset-top, 0px);
-
-    --safe-bottom:
-        env(safe-area-inset-bottom, 0px);
-
-    --radius:
-        30px;
+        rgba(255,255,255,0.22);
 }
 
 
@@ -37,12 +32,11 @@ html {
     width: 100%;
     min-height: 100%;
 
-    background: #08000f;
+    background:
+        #08000f;
 
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
-
-    scroll-behavior: smooth;
 }
 
 
@@ -50,6 +44,8 @@ body {
 
     width: 100%;
     min-height: 100svh;
+
+    overflow-x: hidden;
 
     font-family:
         "Inter",
@@ -60,21 +56,19 @@ body {
         sans-serif;
 
     color:
-        var(--text);
-
-    overflow-x: hidden;
+        white;
 
     background:
 
         radial-gradient(
             circle at 10% 5%,
-            rgba(139,92,246,0.58),
+            rgba(139,92,246,0.55),
             transparent 35%
         ),
 
         radial-gradient(
             circle at 95% 90%,
-            rgba(37,99,235,0.50),
+            rgba(37,99,235,0.46),
             transparent 38%
         ),
 
@@ -110,11 +104,9 @@ body {
 }
 
 
-/* =========================================================
-   AURORA
-========================================================= */
-
-.aurora {
+.aurora,
+.orb,
+.light {
 
     position: absolute;
 
@@ -129,11 +121,12 @@ body {
 
     backface-visibility:
         hidden;
-
-    contain:
-        layout paint;
 }
 
+
+/* =========================================================
+   AURORA
+========================================================= */
 
 .aurora-1 {
 
@@ -154,7 +147,11 @@ body {
         blur(35px);
 
     animation:
-        auroraOne 22s ease-in-out infinite alternate;
+        auroraOne
+        22s
+        ease-in-out
+        infinite
+        alternate;
 }
 
 
@@ -177,7 +174,11 @@ body {
         blur(35px);
 
     animation:
-        auroraTwo 26s ease-in-out infinite alternate;
+        auroraTwo
+        26s
+        ease-in-out
+        infinite
+        alternate;
 }
 
 
@@ -200,19 +201,23 @@ body {
         blur(35px);
 
     animation:
-        auroraThree 29s ease-in-out infinite alternate;
+        auroraThree
+        29s
+        ease-in-out
+        infinite
+        alternate;
 }
 
 
 @keyframes auroraOne {
 
-    0% {
+    from {
         transform:
             translate3d(0,0,0)
             rotate(0deg);
     }
 
-    100% {
+    to {
         transform:
             translate3d(90px,70px,0)
             rotate(12deg);
@@ -222,13 +227,13 @@ body {
 
 @keyframes auroraTwo {
 
-    0% {
+    from {
         transform:
             translate3d(0,0,0)
             rotate(0deg);
     }
 
-    100% {
+    to {
         transform:
             translate3d(-90px,-60px,0)
             rotate(-10deg);
@@ -238,12 +243,12 @@ body {
 
 @keyframes auroraThree {
 
-    0% {
+    from {
         transform:
             translate3d(0,0,0);
     }
 
-    100% {
+    to {
         transform:
             translate3d(70px,-50px,0);
     }
@@ -253,28 +258,6 @@ body {
 /* =========================================================
    ORBS
 ========================================================= */
-
-.orb {
-
-    position: absolute;
-
-    border-radius: 50%;
-
-    pointer-events: none;
-
-    contain:
-        layout paint;
-
-    will-change:
-        transform;
-
-    transform:
-        translate3d(0,0,0);
-
-    backface-visibility:
-        hidden;
-}
-
 
 .orb-1 {
 
@@ -287,8 +270,8 @@ body {
     background:
         radial-gradient(
             circle,
-            rgba(168,85,247,0.86),
-            rgba(139,92,246,0.22) 55%,
+            rgba(168,85,247,0.82),
+            rgba(139,92,246,0.20) 55%,
             transparent 72%
         );
 
@@ -296,7 +279,11 @@ body {
         blur(45px);
 
     animation:
-        orbOne 16s ease-in-out infinite alternate;
+        orbOne
+        16s
+        ease-in-out
+        infinite
+        alternate;
 }
 
 
@@ -311,8 +298,8 @@ body {
     background:
         radial-gradient(
             circle,
-            rgba(59,130,246,0.82),
-            rgba(37,99,235,0.20) 55%,
+            rgba(59,130,246,0.80),
+            rgba(37,99,235,0.18) 55%,
             transparent 72%
         );
 
@@ -320,7 +307,11 @@ body {
         blur(45px);
 
     animation:
-        orbTwo 19s ease-in-out infinite alternate;
+        orbTwo
+        19s
+        ease-in-out
+        infinite
+        alternate;
 }
 
 
@@ -335,7 +326,7 @@ body {
     background:
         radial-gradient(
             circle,
-            rgba(236,72,153,0.72),
+            rgba(236,72,153,0.70),
             rgba(217,70,239,0.18) 55%,
             transparent 72%
         );
@@ -344,16 +335,15 @@ body {
         blur(45px);
 
     animation:
-        orbThree 21s ease-in-out infinite alternate;
+        orbThree
+        21s
+        ease-in-out
+        infinite
+        alternate;
 }
 
 
 @keyframes orbOne {
-
-    from {
-        transform:
-            translate3d(0,0,0);
-    }
 
     to {
         transform:
@@ -364,11 +354,6 @@ body {
 
 @keyframes orbTwo {
 
-    from {
-        transform:
-            translate3d(0,0,0);
-    }
-
     to {
         transform:
             translate3d(-70px,-55px,0);
@@ -378,11 +363,6 @@ body {
 
 @keyframes orbThree {
 
-    from {
-        transform:
-            translate3d(0,0,0);
-    }
-
     to {
         transform:
             translate3d(65px,-45px,0);
@@ -391,17 +371,16 @@ body {
 
 
 /* =========================================================
-   PEQUENOS REFLEXOS
+   REFLEXOS
 ========================================================= */
 
-.light {
-
-    position: absolute;
+.light-1 {
 
     width: 100px;
     height: 100px;
 
-    border-radius: 50%;
+    top: 18%;
+    left: 20%;
 
     background:
         rgba(255,255,255,0.22);
@@ -412,34 +391,38 @@ body {
     opacity:
         0.22;
 
-    will-change:
-        transform;
-
-    transform:
-        translate3d(0,0,0);
-}
-
-
-.light-1 {
-
-    top: 18%;
-    left: 20%;
-
     animation:
-        lightOne 15s ease-in-out infinite alternate;
+        lightOne
+        15s
+        ease-in-out
+        infinite
+        alternate;
 }
 
 
 .light-2 {
 
+    width: 100px;
+    height: 100px;
+
     right: 18%;
     bottom: 20%;
+
+    background:
+        rgba(255,255,255,0.18);
+
+    filter:
+        blur(35px);
 
     opacity:
         0.16;
 
     animation:
-        lightTwo 18s ease-in-out infinite alternate;
+        lightTwo
+        18s
+        ease-in-out
+        infinite
+        alternate;
 }
 
 
@@ -470,8 +453,6 @@ body {
     position: absolute;
 
     inset: 0;
-
-    overflow: hidden;
 }
 
 
@@ -502,7 +483,8 @@ body {
         particleFloat
         var(--duration)
         ease-in-out
-        infinite alternate;
+        infinite
+        alternate;
 }
 
 
@@ -512,13 +494,11 @@ body {
     --duration: 11s;
 }
 
-
 .p2 {
     left: 80%;
     top: 15%;
     --duration: 14s;
 }
-
 
 .p3 {
     left: 68%;
@@ -526,13 +506,11 @@ body {
     --duration: 17s;
 }
 
-
 .p4 {
     left: 25%;
     top: 62%;
     --duration: 13s;
 }
-
 
 .p5 {
     left: 88%;
@@ -540,20 +518,17 @@ body {
     --duration: 16s;
 }
 
-
 .p6 {
     left: 8%;
     top: 80%;
     --duration: 19s;
 }
 
-
 .p7 {
     left: 48%;
     top: 12%;
     --duration: 15s;
 }
-
 
 .p8 {
     left: 55%;
@@ -622,7 +597,7 @@ body {
 
 
 /* =========================================================
-   GLASS CARD
+   CARD PRINCIPAL
 ========================================================= */
 
 .glass-card {
@@ -640,27 +615,27 @@ body {
         29px 22px 21px;
 
     border-radius:
-        var(--radius);
+        30px;
 
     background:
 
         linear-gradient(
             145deg,
             rgba(255,255,255,0.19),
-            rgba(255,255,255,0.065)
+            rgba(255,255,255,0.055)
         );
 
     border:
         1px solid
-        var(--glass-border);
+        rgba(255,255,255,0.25);
 
     backdrop-filter:
         blur(16px)
-        saturate(140%);
+        saturate(145%);
 
     -webkit-backdrop-filter:
         blur(16px)
-        saturate(140%);
+        saturate(145%);
 
     box-shadow:
 
@@ -681,15 +656,8 @@ body {
 
     transform:
         translateZ(0);
-
-    backface-visibility:
-        hidden;
 }
 
-
-/* =========================================================
-   REFLEXO DO VIDRO
-========================================================= */
 
 .glass-highlight {
 
@@ -700,59 +668,22 @@ body {
         0;
 
     left:
-        8%;
+        7%;
 
     width:
-        84%;
+        86%;
 
     height:
         1px;
 
     background:
-        rgba(255,255,255,0.82);
+        rgba(255,255,255,0.85);
 
     opacity:
-        0.72;
+        0.70;
 
     pointer-events:
         none;
-}
-
-
-.glass-card::before {
-
-    content:
-        "";
-
-    position:
-        absolute;
-
-    top:
-        -100px;
-
-    right:
-        -80px;
-
-    width:
-        190px;
-
-    height:
-        190px;
-
-    border-radius:
-        50%;
-
-    background:
-        rgba(255,255,255,0.09);
-
-    filter:
-        blur(25px);
-
-    pointer-events:
-        none;
-
-    z-index:
-        -1;
 }
 
 
@@ -787,31 +718,24 @@ body {
 
         linear-gradient(
             145deg,
-            rgba(255,255,255,0.27),
-            rgba(255,255,255,0.07)
+            rgba(255,255,255,0.25),
+            rgba(255,255,255,0.06)
         );
 
     border:
         1px solid
-        rgba(255,255,255,0.23);
+        rgba(255,255,255,0.25);
 
     box-shadow:
 
         inset 0 1px 1px
-        rgba(255,255,255,0.38),
+        rgba(255,255,255,0.40),
+
+        inset 0 -1px 1px
+        rgba(255,255,255,0.05),
 
         0 10px 25px
         rgba(0,0,0,0.20);
-
-    transform:
-        translateZ(0);
-}
-
-
-.icon svg {
-
-    overflow:
-        visible;
 }
 
 
@@ -882,16 +806,13 @@ h1 {
 
     margin-bottom:
         14px;
-
-    text-wrap:
-        balance;
 }
 
 
 .description {
 
     color:
-        var(--muted);
+        rgba(255,255,255,0.63);
 
     font-size:
         14px;
@@ -909,9 +830,6 @@ h1 {
 ========================================================= */
 
 .field {
-
-    position:
-        relative;
 
     margin-bottom:
         16px;
@@ -937,8 +855,153 @@ h1 {
 }
 
 
-input,
-textarea {
+/* =========================================================
+   LIQUID INPUT
+========================================================= */
+
+.liquid-input {
+
+    position:
+        relative;
+
+    width:
+        100%;
+
+    overflow:
+        hidden;
+
+    border-radius:
+        18px;
+
+    background:
+
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,0.105),
+            rgba(255,255,255,0.035)
+        );
+
+    border:
+        1px solid
+        rgba(255,255,255,0.16);
+
+    box-shadow:
+
+        /*
+            brilho externo
+        */
+
+        0 8px 25px
+        rgba(0,0,0,0.13),
+
+        /*
+            vidro interno
+        */
+
+        inset 0 1px 1px
+        rgba(255,255,255,0.18),
+
+        inset 0 -1px 1px
+        rgba(255,255,255,0.035);
+
+    transform:
+        translateZ(0);
+
+    transition:
+        border-color .2s ease,
+        background-color .2s ease,
+        box-shadow .2s ease;
+}
+
+
+.liquid-input::before {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    top:
+        0;
+
+    left:
+        7%;
+
+    width:
+        86%;
+
+    height:
+        1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,0.55),
+            transparent
+        );
+
+    opacity:
+        0.75;
+
+    pointer-events:
+        none;
+
+    z-index:
+        3;
+}
+
+
+/*
+    Reflexo interno diagonal
+*/
+
+.input-shine {
+
+    position:
+        absolute;
+
+    top:
+        -55px;
+
+    left:
+        -30px;
+
+    width:
+        190px;
+
+    height:
+        90px;
+
+    border-radius:
+        50%;
+
+    background:
+        rgba(255,255,255,0.055);
+
+    filter:
+        blur(15px);
+
+    transform:
+        rotate(-15deg);
+
+    pointer-events:
+        none;
+
+    z-index:
+        0;
+}
+
+
+.liquid-input input,
+.liquid-input textarea {
+
+    position:
+        relative;
+
+    z-index:
+        1;
 
     display:
         block;
@@ -947,31 +1010,19 @@ textarea {
         100%;
 
     border:
-        1px solid
-        rgba(255,255,255,0.13);
+        0;
 
     outline:
         none;
 
     color:
-        #ffffff;
+        white;
 
     background:
-        rgba(0,0,0,0.13);
-
-    border-radius:
-        17px;
-
-    padding:
-        15px 16px;
+        transparent;
 
     font-family:
         inherit;
-
-    /*
-        16px evita zoom indesejado
-        no iOS.
-    */
 
     font-size:
         16px;
@@ -986,24 +1037,21 @@ textarea {
         none;
 
     box-shadow:
-        inset 0 1px 1px
-        rgba(255,255,255,0.06);
-
-    transition:
-        border-color .18s ease,
-        background-color .18s ease,
-        box-shadow .18s ease;
+        none;
 }
 
 
-input {
+.liquid-input input {
 
     height:
         52px;
+
+    padding:
+        15px 16px;
 }
 
 
-textarea {
+.liquid-input textarea {
 
     min-height:
         135px;
@@ -1011,13 +1059,13 @@ textarea {
     resize:
         none;
 
-    padding-bottom:
-        30px;
+    padding:
+        15px 16px 32px;
 }
 
 
-input::placeholder,
-textarea::placeholder {
+.liquid-input input::placeholder,
+.liquid-input textarea::placeholder {
 
     color:
         rgba(255,255,255,0.35);
@@ -1027,21 +1075,36 @@ textarea::placeholder {
 }
 
 
-input:focus,
-textarea:focus {
+/* =========================================================
+   FOCO DO VIDRO
+========================================================= */
 
-    border-color:
-        rgba(255,255,255,0.40);
+.liquid-input:focus-within {
 
     background:
-        rgba(255,255,255,0.07);
+
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,0.15),
+            rgba(255,255,255,0.055)
+        );
+
+    border-color:
+        rgba(255,255,255,0.34);
 
     box-shadow:
+
+        0 10px 28px
+        rgba(0,0,0,0.17),
+
         0 0 0 3px
         rgba(255,255,255,0.045),
 
         inset 0 1px 1px
-        rgba(255,255,255,0.09);
+        rgba(255,255,255,0.30),
+
+        inset 0 -1px 1px
+        rgba(255,255,255,0.06);
 }
 
 
@@ -1058,7 +1121,10 @@ textarea:focus {
         13px;
 
     bottom:
-        11px;
+        10px;
+
+    z-index:
+        2;
 
     font-size:
         10px;
@@ -1128,7 +1194,7 @@ textarea:focus {
 
 
 /* =========================================================
-   SWITCH
+   SWITCH LIQUID GLASS
 ========================================================= */
 
 .switch {
@@ -1140,10 +1206,10 @@ textarea:focus {
         0 0 auto;
 
     width:
-        48px;
+        50px;
 
     height:
-        28px;
+        29px;
 }
 
 
@@ -1163,7 +1229,7 @@ textarea:focus {
 }
 
 
-.switch span {
+.switch-glass {
 
     position:
         absolute;
@@ -1171,28 +1237,73 @@ textarea:focus {
     inset:
         0;
 
+    overflow:
+        hidden;
+
     border-radius:
         30px;
 
     background:
-        rgba(255,255,255,0.12);
+
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,0.17),
+            rgba(255,255,255,0.06)
+        );
 
     border:
         1px solid
-        rgba(255,255,255,0.18);
+        rgba(255,255,255,0.22);
+
+    box-shadow:
+
+        inset 0 1px 1px
+        rgba(255,255,255,0.30),
+
+        inset 0 -1px 1px
+        rgba(255,255,255,0.04),
+
+        0 5px 15px
+        rgba(0,0,0,0.16);
 
     cursor:
         pointer;
 
     transition:
-        background-color .2s ease;
+        background-color .2s ease,
+        border-color .2s ease;
 }
 
 
-.switch span::after {
+.switch-reflection {
 
-    content:
-        "";
+    position:
+        absolute;
+
+    top:
+        -8px;
+
+    left:
+        7px;
+
+    width:
+        28px;
+
+    height:
+        13px;
+
+    border-radius:
+        50%;
+
+    background:
+        rgba(255,255,255,0.16);
+
+    filter:
+        blur(5px);
+}
+
+
+.switch-knob {
 
     position:
         absolute;
@@ -1204,45 +1315,70 @@ textarea:focus {
         3px;
 
     width:
-        20px;
+        21px;
 
     height:
-        20px;
+        21px;
 
     border-radius:
         50%;
 
     background:
-        #ffffff;
+
+        linear-gradient(
+            145deg,
+            #ffffff,
+            rgba(255,255,255,0.82)
+        );
 
     box-shadow:
+
         0 3px 10px
-        rgba(0,0,0,0.30);
+        rgba(0,0,0,0.30),
+
+        inset 0 1px 1px
+        rgba(255,255,255,1);
 
     transition:
-        transform .2s ease;
+        transform .22s cubic-bezier(.2,.8,.2,1);
 }
 
 
-.switch input:checked + span {
+.switch input:checked + .switch-glass {
 
     background:
-        rgba(255,255,255,0.34);
+
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,0.29),
+            rgba(255,255,255,0.11)
+        );
+
+    border-color:
+        rgba(255,255,255,0.30);
 }
 
 
-.switch input:checked + span::after {
+.switch input:checked
++ .switch-glass
+.switch-knob {
 
     transform:
-        translate3d(20px,0,0);
+        translate3d(21px,0,0);
 }
 
 
 /* =========================================================
-   BOTÃO
+   BOTÃO LIQUID GLASS
 ========================================================= */
 
 .send-button {
+
+    position:
+        relative;
+
+    overflow:
+        hidden;
 
     width:
         100%;
@@ -1264,15 +1400,15 @@ textarea:focus {
 
     border:
         1px solid
-        rgba(255,255,255,0.48);
+        rgba(255,255,255,0.55);
 
     border-radius:
-        18px;
+        19px;
 
     background:
 
         linear-gradient(
-            135deg,
+            145deg,
             rgba(255,255,255,0.96),
             rgba(255,255,255,0.72)
         );
@@ -1295,24 +1431,74 @@ textarea:focus {
     touch-action:
         manipulation;
 
-    user-select:
-        none;
-
-    -webkit-user-select:
-        none;
-
     box-shadow:
 
-        0 12px 27px
-        rgba(0,0,0,0.24),
+        0 14px 30px
+        rgba(0,0,0,0.25),
 
         inset 0 1px 1px
-        rgba(255,255,255,1);
+        rgba(255,255,255,1),
+
+        inset 0 -1px 1px
+        rgba(255,255,255,0.30);
+
+    transform:
+        translateZ(0);
 
     transition:
         transform .15s ease,
         box-shadow .15s ease,
         opacity .15s ease;
+}
+
+
+/*
+    Reflexo que atravessa
+    a superfície do botão
+*/
+
+.button-reflection {
+
+    position:
+        absolute;
+
+    top:
+        -35px;
+
+    left:
+        8%;
+
+    width:
+        84%;
+
+    height:
+        28px;
+
+    border-radius:
+        50%;
+
+    background:
+        rgba(255,255,255,0.55);
+
+    filter:
+        blur(12px);
+
+    opacity:
+        0.45;
+
+    pointer-events:
+        none;
+}
+
+
+.button-label,
+.arrow {
+
+    position:
+        relative;
+
+    z-index:
+        1;
 }
 
 
@@ -1333,6 +1519,14 @@ textarea:focus {
 
     transform:
         scale(.975);
+
+    box-shadow:
+
+        0 7px 18px
+        rgba(0,0,0,0.20),
+
+        inset 0 1px 2px
+        rgba(255,255,255,1);
 }
 
 
@@ -1354,8 +1548,12 @@ textarea:focus {
             translateY(-1px);
 
         box-shadow:
-            0 15px 30px
-            rgba(0,0,0,0.28);
+
+            0 17px 32px
+            rgba(0,0,0,0.28),
+
+            inset 0 1px 1px
+            rgba(255,255,255,1);
     }
 }
 
@@ -1499,7 +1697,8 @@ textarea:focus {
 }
 
 
-.success-overlay.active .success-card {
+.success-overlay.active
+.success-card {
 
     transform:
         translate3d(0,0,0)
@@ -1511,9 +1710,6 @@ textarea:focus {
 
     display:
         flex;
-
-    align-items:
-        center;
 
     justify-content:
         center;
@@ -1558,13 +1754,19 @@ textarea:focus {
         48px;
 
     border:
-        0;
+        1px solid
+        rgba(255,255,255,0.35);
 
     border-radius:
         15px;
 
     background:
-        rgba(255,255,255,0.90);
+
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,0.94),
+            rgba(255,255,255,0.70)
+        );
 
     color:
         #111827;
@@ -1581,13 +1783,14 @@ textarea:focus {
     cursor:
         pointer;
 
-    touch-action:
-        manipulation;
+    box-shadow:
+        inset 0 1px 1px
+        rgba(255,255,255,0.9);
 }
 
 
 /* =========================================================
-   CELULARES
+   MOBILE
 ========================================================= */
 
 @media (max-width:600px) {
@@ -1604,10 +1807,10 @@ textarea:focus {
     }
 
 
-    .orb {
+    .light {
 
-        filter:
-            blur(38px);
+        display:
+            none;
     }
 
 
@@ -1618,21 +1821,16 @@ textarea:focus {
     }
 
 
-    /*
-        Menos elementos simultâneos
-        em telas pequenas.
-    */
+    .orb {
 
-    .light {
-
-        display:
-            none;
+        filter:
+            blur(38px);
     }
 }
 
 
 /* =========================================================
-   CELULARES PEQUENOS
+   TELAS PEQUENAS
 ========================================================= */
 
 @media (max-width:370px) {
@@ -1658,7 +1856,7 @@ textarea:focus {
     }
 
 
-    textarea {
+    .liquid-input textarea {
 
         min-height:
             120px;
@@ -1667,52 +1865,7 @@ textarea:focus {
 
 
 /* =========================================================
-   MODO ECONÔMICO
-========================================================= */
-
-.low-performance .aurora {
-
-    display:
-        none;
-}
-
-
-.low-performance .light {
-
-    display:
-        none;
-}
-
-
-.low-performance .orb {
-
-    filter:
-        blur(24px);
-
-    animation-duration:
-        28s;
-}
-
-
-.low-performance .glass-card {
-
-    backdrop-filter:
-        blur(11px);
-
-    -webkit-backdrop-filter:
-        blur(11px);
-}
-
-
-.low-performance .particles {
-
-    display:
-        none;
-}
-
-
-/* =========================================================
-   REDUCED MOTION
+   REDUÇÃO DE MOVIMENTO
 ========================================================= */
 
 @media (prefers-reduced-motion:reduce) {
@@ -1729,29 +1882,5 @@ textarea:focus {
 
         transition-duration:
             .01ms !important;
-
-        scroll-behavior:
-            auto !important;
     }
-}
-
-
-/* =========================================================
-   DESKTOP
-========================================================= */
-
-@media (min-width:700px) {
-
-    .app {
-
-        padding:
-            50px;
-    }
-
-
-    .glass-card {
-
-        padding:
-            36px 31px 24px;
-    }
-   }
+             }
