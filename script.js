@@ -49,8 +49,11 @@ function detectPerformance() {
 
 
     /*
-        Ativa automaticamente uma versão
-        mais econômica em aparelhos modestos.
+        Alguns celulares possuem
+        pouca memória ou poucos núcleos.
+
+        Nesses casos removemos somente
+        os efeitos mais pesados.
     */
 
     if (
@@ -134,13 +137,13 @@ form.addEventListener(
         const name =
             nameInput.value.trim();
 
-        const text =
+        const message =
             messageInput.value.trim();
 
 
         if (
             !name ||
-            !text
+            !message
         ) {
 
             return;
@@ -156,10 +159,10 @@ form.addEventListener(
 
 
         /*
-            Simulação temporária.
+            Simulação.
 
-            Posteriormente podemos substituir
-            por Firebase.
+            Depois podemos conectar
+            isso ao Firebase.
         */
 
         window.setTimeout(
