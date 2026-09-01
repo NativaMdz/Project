@@ -1,6 +1,6 @@
-/* ==========================================
+/* =========================================================
    RESET
-========================================== */
+========================================================= */
 
 *,
 *::before,
@@ -16,33 +16,28 @@
     --text: #ffffff;
 
     --muted:
-        rgba(255, 255, 255, 0.64);
-
-    --glass:
-        rgba(255, 255, 255, 0.13);
+        rgba(255,255,255,0.63);
 
     --glass-border:
-        rgba(255, 255, 255, 0.25);
+        rgba(255,255,255,0.25);
 
-    --radius:
-        30px;
+    --safe-top:
+        env(safe-area-inset-top, 0px);
 
     --safe-bottom:
         env(safe-area-inset-bottom, 0px);
 
-    --safe-top:
-        env(safe-area-inset-top, 0px);
+    --radius:
+        30px;
 }
 
 
-/* ==========================================
-   DOCUMENTO
-========================================== */
-
 html {
+
     width: 100%;
     min-height: 100%;
-    background: #090014;
+
+    background: #08000f;
 
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
@@ -64,35 +59,40 @@ body {
         "Segoe UI",
         sans-serif;
 
-    color: var(--text);
-
-    background:
-        radial-gradient(
-            circle at 15% 10%,
-            rgba(139, 92, 246, 0.55),
-            transparent 36%
-        ),
-        radial-gradient(
-            circle at 90% 85%,
-            rgba(37, 99, 235, 0.48),
-            transparent 38%
-        ),
-        linear-gradient(
-            145deg,
-            #090014 0%,
-            #111827 52%,
-            #020617 100%
-        );
+    color:
+        var(--text);
 
     overflow-x: hidden;
 
-    -webkit-tap-highlight-color: transparent;
+    background:
+
+        radial-gradient(
+            circle at 10% 5%,
+            rgba(139,92,246,0.58),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            circle at 95% 90%,
+            rgba(37,99,235,0.50),
+            transparent 38%
+        ),
+
+        linear-gradient(
+            145deg,
+            #090014,
+            #111827 52%,
+            #020617
+        );
+
+    -webkit-tap-highlight-color:
+        transparent;
 }
 
 
-/* ==========================================
+/* =========================================================
    FUNDO
-========================================== */
+========================================================= */
 
 .background {
 
@@ -110,9 +110,149 @@ body {
 }
 
 
-/* ==========================================
-   ORB
-========================================== */
+/* =========================================================
+   AURORA
+========================================================= */
+
+.aurora {
+
+    position: absolute;
+
+    border-radius: 50%;
+
+    pointer-events: none;
+
+    will-change: transform;
+
+    transform:
+        translate3d(0,0,0);
+
+    backface-visibility:
+        hidden;
+
+    contain:
+        layout paint;
+}
+
+
+.aurora-1 {
+
+    width: 420px;
+    height: 260px;
+
+    left: -160px;
+    top: 8%;
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(168,85,247,0.20),
+            transparent 70%
+        );
+
+    filter:
+        blur(35px);
+
+    animation:
+        auroraOne 22s ease-in-out infinite alternate;
+}
+
+
+.aurora-2 {
+
+    width: 430px;
+    height: 280px;
+
+    right: -180px;
+    top: 40%;
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(59,130,246,0.20),
+            transparent 70%
+        );
+
+    filter:
+        blur(35px);
+
+    animation:
+        auroraTwo 26s ease-in-out infinite alternate;
+}
+
+
+.aurora-3 {
+
+    width: 400px;
+    height: 250px;
+
+    left: 15%;
+    bottom: -100px;
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(236,72,153,0.18),
+            transparent 70%
+        );
+
+    filter:
+        blur(35px);
+
+    animation:
+        auroraThree 29s ease-in-out infinite alternate;
+}
+
+
+@keyframes auroraOne {
+
+    0% {
+        transform:
+            translate3d(0,0,0)
+            rotate(0deg);
+    }
+
+    100% {
+        transform:
+            translate3d(90px,70px,0)
+            rotate(12deg);
+    }
+}
+
+
+@keyframes auroraTwo {
+
+    0% {
+        transform:
+            translate3d(0,0,0)
+            rotate(0deg);
+    }
+
+    100% {
+        transform:
+            translate3d(-90px,-60px,0)
+            rotate(-10deg);
+    }
+}
+
+
+@keyframes auroraThree {
+
+    0% {
+        transform:
+            translate3d(0,0,0);
+    }
+
+    100% {
+        transform:
+            translate3d(70px,-50px,0);
+    }
+}
+
+
+/* =========================================================
+   ORBS
+========================================================= */
 
 .orb {
 
@@ -122,21 +262,17 @@ body {
 
     pointer-events: none;
 
-    /*
-        Blur continua existindo,
-        mas o elemento inteiro é isolado
-        para diminuir impacto no restante
-        da página.
-    */
+    contain:
+        layout paint;
 
-    contain: layout paint;
-
-    will-change: transform;
+    will-change:
+        transform;
 
     transform:
-        translate3d(0, 0, 0);
+        translate3d(0,0,0);
 
-    backface-visibility: hidden;
+    backface-visibility:
+        hidden;
 }
 
 
@@ -145,21 +281,22 @@ body {
     width: 280px;
     height: 280px;
 
-    left: -100px;
+    left: -110px;
     top: -90px;
 
     background:
         radial-gradient(
             circle,
-            rgba(168, 85, 247, 0.9),
-            rgba(139, 92, 246, 0.25) 55%,
+            rgba(168,85,247,0.86),
+            rgba(139,92,246,0.22) 55%,
             transparent 72%
         );
 
-    filter: blur(45px);
+    filter:
+        blur(45px);
 
     animation:
-        orbFloat1 14s ease-in-out infinite alternate;
+        orbOne 16s ease-in-out infinite alternate;
 }
 
 
@@ -169,20 +306,21 @@ body {
     height: 250px;
 
     right: -100px;
-    top: 32%;
+    top: 33%;
 
     background:
         radial-gradient(
             circle,
-            rgba(59, 130, 246, 0.85),
-            rgba(37, 99, 235, 0.22) 55%,
+            rgba(59,130,246,0.82),
+            rgba(37,99,235,0.20) 55%,
             transparent 72%
         );
 
-    filter: blur(45px);
+    filter:
+        blur(45px);
 
     animation:
-        orbFloat2 17s ease-in-out infinite alternate;
+        orbTwo 19s ease-in-out infinite alternate;
 }
 
 
@@ -197,358 +335,544 @@ body {
     background:
         radial-gradient(
             circle,
-            rgba(236, 72, 153, 0.75),
-            rgba(217, 70, 239, 0.2) 55%,
+            rgba(236,72,153,0.72),
+            rgba(217,70,239,0.18) 55%,
             transparent 72%
         );
 
-    filter: blur(45px);
+    filter:
+        blur(45px);
 
     animation:
-        orbFloat3 19s ease-in-out infinite alternate;
+        orbThree 21s ease-in-out infinite alternate;
 }
 
 
-/* ==========================================
-   MOVIMENTO DOS ORBS
-========================================== */
-
-@keyframes orbFloat1 {
+@keyframes orbOne {
 
     from {
         transform:
-            translate3d(0, 0, 0);
+            translate3d(0,0,0);
     }
 
     to {
         transform:
-            translate3d(70px, 75px, 0);
+            translate3d(75px,65px,0);
     }
 }
 
 
-@keyframes orbFloat2 {
+@keyframes orbTwo {
 
     from {
         transform:
-            translate3d(0, 0, 0);
+            translate3d(0,0,0);
     }
 
     to {
         transform:
-            translate3d(-75px, -55px, 0);
+            translate3d(-70px,-55px,0);
     }
 }
 
 
-@keyframes orbFloat3 {
+@keyframes orbThree {
 
     from {
         transform:
-            translate3d(0, 0, 0);
+            translate3d(0,0,0);
     }
 
     to {
         transform:
-            translate3d(65px, -45px, 0);
+            translate3d(65px,-45px,0);
     }
 }
 
 
-/* ==========================================
-   LUZES
-========================================== */
+/* =========================================================
+   PEQUENOS REFLEXOS
+========================================================= */
 
 .light {
 
     position: absolute;
 
-    width: 120px;
-    height: 120px;
+    width: 100px;
+    height: 100px;
 
     border-radius: 50%;
 
-    opacity: 0.25;
+    background:
+        rgba(255,255,255,0.22);
 
-    filter: blur(35px);
+    filter:
+        blur(35px);
 
-    will-change: transform;
+    opacity:
+        0.22;
+
+    will-change:
+        transform;
 
     transform:
-        translate3d(0, 0, 0);
+        translate3d(0,0,0);
 }
 
 
 .light-1 {
 
-    top: 20%;
-    left: 25%;
-
-    background: #ffffff;
+    top: 18%;
+    left: 20%;
 
     animation:
-        lightFloat1 11s ease-in-out infinite alternate;
+        lightOne 15s ease-in-out infinite alternate;
 }
 
 
 .light-2 {
 
-    right: 20%;
-    bottom: 18%;
+    right: 18%;
+    bottom: 20%;
 
-    background: #ffffff;
-
-    opacity: 0.18;
+    opacity:
+        0.16;
 
     animation:
-        lightFloat2 13s ease-in-out infinite alternate;
+        lightTwo 18s ease-in-out infinite alternate;
 }
 
 
-@keyframes lightFloat1 {
-
-    from {
-        transform:
-            translate3d(0, 0, 0);
-    }
+@keyframes lightOne {
 
     to {
         transform:
-            translate3d(40px, 25px, 0);
+            translate3d(45px,30px,0);
     }
 }
 
 
-@keyframes lightFloat2 {
-
-    from {
-        transform:
-            translate3d(0, 0, 0);
-    }
+@keyframes lightTwo {
 
     to {
         transform:
-            translate3d(-35px, -25px, 0);
+            translate3d(-40px,-25px,0);
     }
 }
 
 
-/* ==========================================
+/* =========================================================
+   PARTÍCULAS
+========================================================= */
+
+.particles {
+
+    position: absolute;
+
+    inset: 0;
+
+    overflow: hidden;
+}
+
+
+.particle {
+
+    position: absolute;
+
+    width: 3px;
+    height: 3px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,0.42);
+
+    box-shadow:
+        0 0 10px
+        rgba(255,255,255,0.30);
+
+    opacity:
+        0.15;
+
+    will-change:
+        transform,
+        opacity;
+
+    animation:
+        particleFloat
+        var(--duration)
+        ease-in-out
+        infinite alternate;
+}
+
+
+.p1 {
+    left: 12%;
+    top: 22%;
+    --duration: 11s;
+}
+
+
+.p2 {
+    left: 80%;
+    top: 15%;
+    --duration: 14s;
+}
+
+
+.p3 {
+    left: 68%;
+    top: 48%;
+    --duration: 17s;
+}
+
+
+.p4 {
+    left: 25%;
+    top: 62%;
+    --duration: 13s;
+}
+
+
+.p5 {
+    left: 88%;
+    top: 72%;
+    --duration: 16s;
+}
+
+
+.p6 {
+    left: 8%;
+    top: 80%;
+    --duration: 19s;
+}
+
+
+.p7 {
+    left: 48%;
+    top: 12%;
+    --duration: 15s;
+}
+
+
+.p8 {
+    left: 55%;
+    top: 88%;
+    --duration: 18s;
+}
+
+
+@keyframes particleFloat {
+
+    0% {
+        transform:
+            translate3d(0,0,0);
+
+        opacity:
+            0.10;
+    }
+
+    50% {
+        opacity:
+            0.28;
+    }
+
+    100% {
+        transform:
+            translate3d(12px,-18px,0);
+
+        opacity:
+            0.12;
+    }
+}
+
+
+/* =========================================================
    APP
-========================================== */
+========================================================= */
 
 .app {
 
-    position: relative;
+    position:
+        relative;
 
-    z-index: 1;
+    z-index:
+        1;
 
-    min-height: 100svh;
+    min-height:
+        100svh;
 
-    min-height: 100dvh;
+    min-height:
+        100dvh;
 
-    display: flex;
+    display:
+        flex;
 
-    align-items: center;
+    align-items:
+        center;
 
-    justify-content: center;
+    justify-content:
+        center;
 
     padding:
         calc(22px + var(--safe-top))
-        17px
+        16px
         calc(22px + var(--safe-bottom));
 }
 
 
-/* ==========================================
+/* =========================================================
    GLASS CARD
-========================================== */
+========================================================= */
 
 .glass-card {
 
-    position: relative;
+    position:
+        relative;
 
-    width: 100%;
+    width:
+        100%;
 
-    max-width: 460px;
+    max-width:
+        460px;
 
     padding:
-        29px
-        22px
-        21px;
+        29px 22px 21px;
 
     border-radius:
         var(--radius);
 
     background:
+
         linear-gradient(
             145deg,
-            rgba(255, 255, 255, 0.19),
-            rgba(255, 255, 255, 0.065)
-        );
-
-    border:
-        1px solid var(--glass-border);
-
-    /*
-        Blur moderado.
-
-        A versão anterior usava 28px.
-        18px costuma entregar quase
-        o mesmo efeito visual em mobile,
-        mas com menor custo.
-    */
-
-    backdrop-filter:
-        blur(18px)
-        saturate(145%);
-
-    -webkit-backdrop-filter:
-        blur(18px)
-        saturate(145%);
-
-    box-shadow:
-
-        0 30px 70px
-        rgba(0, 0, 0, 0.43),
-
-        inset 0 1px 1px
-        rgba(255, 255, 255, 0.40),
-
-        inset 0 -1px 1px
-        rgba(255, 255, 255, 0.06);
-
-    overflow: hidden;
-
-    isolation: isolate;
-
-    transform:
-        translateZ(0);
-
-    backface-visibility: hidden;
-}
-
-
-/* ==========================================
-   REFLEXO SUPERIOR
-========================================== */
-
-.glass-highlight {
-
-    position: absolute;
-
-    top: 0;
-    left: 8%;
-
-    width: 84%;
-
-    height: 1px;
-
-    background:
-        rgba(255, 255, 255, 0.8);
-
-    opacity: 0.75;
-
-    pointer-events: none;
-}
-
-
-/* brilho interno */
-
-.glass-card::before {
-
-    content: "";
-
-    position: absolute;
-
-    top: -90px;
-    right: -80px;
-
-    width: 180px;
-    height: 180px;
-
-    border-radius: 50%;
-
-    background:
-        rgba(255, 255, 255, 0.09);
-
-    filter: blur(25px);
-
-    pointer-events: none;
-
-    z-index: -1;
-}
-
-
-/* ==========================================
-   ÍCONE
-========================================== */
-
-.icon {
-
-    width: 61px;
-    height: 61px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    margin-bottom: 21px;
-
-    border-radius: 19px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255, 255, 255, 0.27),
-            rgba(255, 255, 255, 0.07)
+            rgba(255,255,255,0.19),
+            rgba(255,255,255,0.065)
         );
 
     border:
         1px solid
-        rgba(255, 255, 255, 0.23);
+        var(--glass-border);
+
+    backdrop-filter:
+        blur(16px)
+        saturate(140%);
+
+    -webkit-backdrop-filter:
+        blur(16px)
+        saturate(140%);
+
+    box-shadow:
+
+        0 30px 70px
+        rgba(0,0,0,0.43),
+
+        inset 0 1px 1px
+        rgba(255,255,255,0.40),
+
+        inset 0 -1px 1px
+        rgba(255,255,255,0.06);
+
+    overflow:
+        hidden;
+
+    isolation:
+        isolate;
+
+    transform:
+        translateZ(0);
+
+    backface-visibility:
+        hidden;
+}
+
+
+/* =========================================================
+   REFLEXO DO VIDRO
+========================================================= */
+
+.glass-highlight {
+
+    position:
+        absolute;
+
+    top:
+        0;
+
+    left:
+        8%;
+
+    width:
+        84%;
+
+    height:
+        1px;
+
+    background:
+        rgba(255,255,255,0.82);
+
+    opacity:
+        0.72;
+
+    pointer-events:
+        none;
+}
+
+
+.glass-card::before {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    top:
+        -100px;
+
+    right:
+        -80px;
+
+    width:
+        190px;
+
+    height:
+        190px;
+
+    border-radius:
+        50%;
+
+    background:
+        rgba(255,255,255,0.09);
+
+    filter:
+        blur(25px);
+
+    pointer-events:
+        none;
+
+    z-index:
+        -1;
+}
+
+
+/* =========================================================
+   ÍCONE
+========================================================= */
+
+.icon {
+
+    width:
+        61px;
+
+    height:
+        61px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    margin-bottom:
+        21px;
+
+    border-radius:
+        19px;
+
+    background:
+
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,0.27),
+            rgba(255,255,255,0.07)
+        );
+
+    border:
+        1px solid
+        rgba(255,255,255,0.23);
 
     box-shadow:
 
         inset 0 1px 1px
-        rgba(255, 255, 255, 0.38),
+        rgba(255,255,255,0.38),
 
         0 10px 25px
-        rgba(0, 0, 0, 0.20);
-
-    font-size: 27px;
+        rgba(0,0,0,0.20);
 
     transform:
         translateZ(0);
 }
 
 
-/* ==========================================
+.icon svg {
+
+    overflow:
+        visible;
+}
+
+
+.heart {
+
+    transform-origin:
+        center;
+
+    animation:
+        heartPulse
+        3.8s
+        ease-in-out
+        infinite;
+}
+
+
+@keyframes heartPulse {
+
+    0%,
+    100% {
+        transform:
+            scale(1);
+    }
+
+    50% {
+        transform:
+            scale(1.07);
+    }
+}
+
+
+/* =========================================================
    TEXTOS
-========================================== */
+========================================================= */
 
 .eyebrow {
 
-    display: block;
+    display:
+        block;
 
-    margin-bottom: 9px;
+    margin-bottom:
+        9px;
 
-    font-size: 10px;
+    font-size:
+        10px;
 
-    font-weight: 700;
+    font-weight:
+        700;
 
-    letter-spacing: 1.8px;
+    letter-spacing:
+        1.8px;
 
     color:
-        rgba(255, 255, 255, 0.52);
+        rgba(255,255,255,0.52);
 }
 
 
 h1 {
 
     font-size:
-        clamp(30px, 8vw, 42px);
+        clamp(30px,8vw,42px);
 
     line-height:
         1.05;
@@ -580,13 +904,14 @@ h1 {
 }
 
 
-/* ==========================================
+/* =========================================================
    CAMPOS
-========================================== */
+========================================================= */
 
 .field {
 
-    position: relative;
+    position:
+        relative;
 
     margin-bottom:
         16px;
@@ -595,7 +920,8 @@ h1 {
 
 .field label {
 
-    display: block;
+    display:
+        block;
 
     margin-bottom:
         8px;
@@ -607,28 +933,31 @@ h1 {
         600;
 
     color:
-        rgba(255, 255, 255, 0.72);
+        rgba(255,255,255,0.72);
 }
 
 
 input,
 textarea {
 
-    display: block;
+    display:
+        block;
 
-    width: 100%;
+    width:
+        100%;
 
     border:
         1px solid
-        rgba(255, 255, 255, 0.13);
+        rgba(255,255,255,0.13);
 
-    outline: none;
+    outline:
+        none;
 
     color:
         #ffffff;
 
     background:
-        rgba(0, 0, 0, 0.13);
+        rgba(0,0,0,0.13);
 
     border-radius:
         17px;
@@ -639,29 +968,31 @@ textarea {
     font-family:
         inherit;
 
+    /*
+        16px evita zoom indesejado
+        no iOS.
+    */
+
     font-size:
         16px;
-
-    /*
-        16px evita zoom automático
-        em vários navegadores mobile.
-    */
 
     line-height:
         1.4;
 
+    appearance:
+        none;
+
+    -webkit-appearance:
+        none;
+
     box-shadow:
         inset 0 1px 1px
-        rgba(255, 255, 255, 0.06);
-
-    appearance: none;
-
-    -webkit-appearance: none;
+        rgba(255,255,255,0.06);
 
     transition:
-        border-color 0.18s ease,
-        background-color 0.18s ease,
-        box-shadow 0.18s ease;
+        border-color .18s ease,
+        background-color .18s ease,
+        box-shadow .18s ease;
 }
 
 
@@ -680,9 +1011,6 @@ textarea {
     resize:
         none;
 
-    line-height:
-        1.5;
-
     padding-bottom:
         30px;
 }
@@ -692,7 +1020,7 @@ input::placeholder,
 textarea::placeholder {
 
     color:
-        rgba(255, 255, 255, 0.35);
+        rgba(255,255,255,0.35);
 
     opacity:
         1;
@@ -703,26 +1031,28 @@ input:focus,
 textarea:focus {
 
     border-color:
-        rgba(255, 255, 255, 0.40);
+        rgba(255,255,255,0.40);
 
     background:
-        rgba(255, 255, 255, 0.07);
+        rgba(255,255,255,0.07);
 
     box-shadow:
         0 0 0 3px
-        rgba(255, 255, 255, 0.045),
+        rgba(255,255,255,0.045),
+
         inset 0 1px 1px
-        rgba(255, 255, 255, 0.09);
+        rgba(255,255,255,0.09);
 }
 
 
-/* ==========================================
+/* =========================================================
    CONTADOR
-========================================== */
+========================================================= */
 
 .counter {
 
-    position: absolute;
+    position:
+        absolute;
 
     right:
         13px;
@@ -734,16 +1064,16 @@ textarea:focus {
         10px;
 
     color:
-        rgba(255, 255, 255, 0.34);
+        rgba(255,255,255,0.34);
 
     pointer-events:
         none;
 }
 
 
-/* ==========================================
+/* =========================================================
    ANONIMATO
-========================================== */
+========================================================= */
 
 .secret-option {
 
@@ -793,13 +1123,13 @@ textarea:focus {
         10px;
 
     color:
-        rgba(255, 255, 255, 0.42);
+        rgba(255,255,255,0.42);
 }
 
 
-/* ==========================================
+/* =========================================================
    SWITCH
-========================================== */
+========================================================= */
 
 .switch {
 
@@ -830,9 +1160,6 @@ textarea:focus {
 
     opacity:
         0;
-
-    pointer-events:
-        none;
 }
 
 
@@ -848,17 +1175,17 @@ textarea:focus {
         30px;
 
     background:
-        rgba(255, 255, 255, 0.12);
+        rgba(255,255,255,0.12);
 
     border:
         1px solid
-        rgba(255, 255, 255, 0.18);
+        rgba(255,255,255,0.18);
 
     cursor:
         pointer;
 
     transition:
-        background-color 0.2s ease;
+        background-color .2s ease;
 }
 
 
@@ -890,30 +1217,30 @@ textarea:focus {
 
     box-shadow:
         0 3px 10px
-        rgba(0, 0, 0, 0.30);
+        rgba(0,0,0,0.30);
 
     transition:
-        transform 0.2s ease;
+        transform .2s ease;
 }
 
 
 .switch input:checked + span {
 
     background:
-        rgba(255, 255, 255, 0.34);
+        rgba(255,255,255,0.34);
 }
 
 
 .switch input:checked + span::after {
 
     transform:
-        translate3d(20px, 0, 0);
+        translate3d(20px,0,0);
 }
 
 
-/* ==========================================
+/* =========================================================
    BOTÃO
-========================================== */
+========================================================= */
 
 .send-button {
 
@@ -937,16 +1264,17 @@ textarea:focus {
 
     border:
         1px solid
-        rgba(255, 255, 255, 0.48);
+        rgba(255,255,255,0.48);
 
     border-radius:
         18px;
 
     background:
+
         linear-gradient(
             135deg,
-            rgba(255, 255, 255, 0.96),
-            rgba(255, 255, 255, 0.72)
+            rgba(255,255,255,0.96),
+            rgba(255,255,255,0.72)
         );
 
     color:
@@ -967,60 +1295,74 @@ textarea:focus {
     touch-action:
         manipulation;
 
-    -webkit-user-select:
-        none;
-
     user-select:
         none;
 
+    -webkit-user-select:
+        none;
+
     box-shadow:
+
         0 12px 27px
-        rgba(0, 0, 0, 0.24),
+        rgba(0,0,0,0.24),
 
         inset 0 1px 1px
-        rgba(255, 255, 255, 1);
+        rgba(255,255,255,1);
 
     transition:
-        transform 0.15s ease,
-        box-shadow 0.15s ease,
-        opacity 0.15s ease;
+        transform .15s ease,
+        box-shadow .15s ease,
+        opacity .15s ease;
 }
 
 
-.send-button .arrow {
+.arrow {
 
-    font-size:
-        22px;
+    display:
+        flex;
 
-    line-height:
-        1;
+    align-items:
+        center;
+
+    justify-content:
+        center;
 }
 
 
 .send-button:active {
 
     transform:
-        scale(0.975);
-
-    box-shadow:
-        0 7px 18px
-        rgba(0, 0, 0, 0.25);
+        scale(.975);
 }
 
 
 .send-button:disabled {
 
     opacity:
-        0.65;
+        .65;
 
     cursor:
         default;
 }
 
 
-/* ==========================================
+@media (hover:hover) {
+
+    .send-button:hover {
+
+        transform:
+            translateY(-1px);
+
+        box-shadow:
+            0 15px 30px
+            rgba(0,0,0,0.28);
+    }
+}
+
+
+/* =========================================================
    FOOTER
-========================================== */
+========================================================= */
 
 .footer {
 
@@ -1037,13 +1379,13 @@ textarea:focus {
         1.4;
 
     color:
-        rgba(255, 255, 255, 0.28);
+        rgba(255,255,255,0.28);
 }
 
 
-/* ==========================================
+/* =========================================================
    MODAL
-========================================== */
+========================================================= */
 
 .success-overlay {
 
@@ -1069,7 +1411,7 @@ textarea:focus {
         20px;
 
     background:
-        rgba(0, 0, 0, 0.32);
+        rgba(0,0,0,0.32);
 
     backdrop-filter:
         blur(12px);
@@ -1087,8 +1429,8 @@ textarea:focus {
         none;
 
     transition:
-        opacity 0.25s ease,
-        visibility 0.25s ease;
+        opacity .25s ease,
+        visibility .25s ease;
 }
 
 
@@ -1120,15 +1462,16 @@ textarea:focus {
         27px;
 
     background:
+
         linear-gradient(
             145deg,
-            rgba(255, 255, 255, 0.21),
-            rgba(255, 255, 255, 0.07)
+            rgba(255,255,255,0.21),
+            rgba(255,255,255,0.07)
         );
 
     border:
         1px solid
-        rgba(255, 255, 255, 0.28);
+        rgba(255,255,255,0.28);
 
     backdrop-filter:
         blur(20px);
@@ -1140,33 +1483,40 @@ textarea:focus {
         center;
 
     box-shadow:
+
         0 30px 65px
-        rgba(0, 0, 0, 0.43),
+        rgba(0,0,0,0.43),
 
         inset 0 1px 1px
-        rgba(255, 255, 255, 0.38);
+        rgba(255,255,255,0.38);
 
     transform:
-        translate3d(0, 16px, 0)
-        scale(0.97);
+        translate3d(0,16px,0)
+        scale(.97);
 
     transition:
-        transform 0.28s ease;
+        transform .28s ease;
 }
 
 
 .success-overlay.active .success-card {
 
     transform:
-        translate3d(0, 0, 0)
+        translate3d(0,0,0)
         scale(1);
 }
 
 
 .success-icon {
 
-    font-size:
-        39px;
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
 
     margin-bottom:
         11px;
@@ -1186,7 +1536,7 @@ textarea:focus {
 .success-card p {
 
     color:
-        rgba(255, 255, 255, 0.61);
+        rgba(255,255,255,0.61);
 
     font-size:
         13px;
@@ -1214,7 +1564,7 @@ textarea:focus {
         15px;
 
     background:
-        rgba(255, 255, 255, 0.90);
+        rgba(255,255,255,0.90);
 
     color:
         #111827;
@@ -1236,58 +1586,11 @@ textarea:focus {
 }
 
 
-/* ==========================================
-   TOUCH
-========================================== */
-
-@media (hover: hover) {
-
-    .send-button:hover {
-
-        transform:
-            translateY(-1px);
-
-        box-shadow:
-            0 15px 30px
-            rgba(0, 0, 0, 0.28);
-    }
-
-}
-
-
-/* ==========================================
+/* =========================================================
    CELULARES
-========================================== */
+========================================================= */
 
-@media (max-width: 600px) {
-
-    .app {
-
-        padding-left:
-            16px;
-
-        padding-right:
-            16px;
-    }
-
-
-    .glass-card {
-
-        padding:
-            27px
-            20px
-            20px;
-
-        border-radius:
-            29px;
-    }
-
-
-    /*
-        Menos blur em telas pequenas.
-        Visual praticamente igual,
-        processamento menor.
-    */
+@media (max-width:600px) {
 
     .glass-card {
 
@@ -1308,6 +1611,18 @@ textarea:focus {
     }
 
 
+    .aurora {
+
+        filter:
+            blur(30px);
+    }
+
+
+    /*
+        Menos elementos simultâneos
+        em telas pequenas.
+    */
+
     .light {
 
         display:
@@ -1316,11 +1631,11 @@ textarea:focus {
 }
 
 
-/* ==========================================
-   CELULARES MUITO PEQUENOS
-========================================== */
+/* =========================================================
+   CELULARES PEQUENOS
+========================================================= */
 
-@media (max-width: 370px) {
+@media (max-width:370px) {
 
     .glass-card {
 
@@ -1351,9 +1666,16 @@ textarea:focus {
 }
 
 
-/* ==========================================
-   MODO DESEMPENHO
-========================================== */
+/* =========================================================
+   MODO ECONÔMICO
+========================================================= */
+
+.low-performance .aurora {
+
+    display:
+        none;
+}
+
 
 .low-performance .light {
 
@@ -1365,10 +1687,10 @@ textarea:focus {
 .low-performance .orb {
 
     filter:
-        blur(25px);
+        blur(24px);
 
     animation-duration:
-        24s;
+        28s;
 }
 
 
@@ -1382,44 +1704,31 @@ textarea:focus {
 }
 
 
-.low-performance .success-overlay {
+.low-performance .particles {
 
-    backdrop-filter:
-        blur(7px);
-
-    -webkit-backdrop-filter:
-        blur(7px);
+    display:
+        none;
 }
 
 
-.low-performance .success-card {
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
 
-    backdrop-filter:
-        blur(13px);
-
-    -webkit-backdrop-filter:
-        blur(13px);
-}
-
-
-/* ==========================================
-   REDUÇÃO DE MOVIMENTO
-========================================== */
-
-@media (prefers-reduced-motion: reduce) {
+@media (prefers-reduced-motion:reduce) {
 
     *,
     *::before,
     *::after {
 
         animation-duration:
-            0.01ms !important;
+            .01ms !important;
 
         animation-iteration-count:
             1 !important;
 
         transition-duration:
-            0.01ms !important;
+            .01ms !important;
 
         scroll-behavior:
             auto !important;
@@ -1427,11 +1736,11 @@ textarea:focus {
 }
 
 
-/* ==========================================
-   TELAS GRANDES
-========================================== */
+/* =========================================================
+   DESKTOP
+========================================================= */
 
-@media (min-width: 700px) {
+@media (min-width:700px) {
 
     .app {
 
@@ -1443,8 +1752,6 @@ textarea:focus {
     .glass-card {
 
         padding:
-            36px
-            31px
-            24px;
+            36px 31px 24px;
     }
-    }
+   }
