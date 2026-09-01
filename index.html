@@ -11,17 +11,7 @@
 
     <meta
         name="theme-color"
-        content="#090014"
-    >
-
-    <meta
-        name="apple-mobile-web-app-capable"
-        content="yes"
-    >
-
-    <meta
-        name="apple-mobile-web-app-status-bar-style"
-        content="black-translucent"
+        content="#08000f"
     >
 
     <title>Admirador Secreto</title>
@@ -37,42 +27,26 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-
 <body>
 
-    <!-- =====================================================
-         FUNDO LIQUID GLASS
-    ====================================================== -->
+    <!-- =========================
+         FUNDO
+    ========================== -->
 
-    <div
-        class="background"
-        aria-hidden="true"
-    >
-
-        <!-- Aurora principal -->
+    <div class="background" aria-hidden="true">
 
         <div class="aurora aurora-1"></div>
         <div class="aurora aurora-2"></div>
         <div class="aurora aurora-3"></div>
 
-
-        <!-- Luzes difusas -->
-
         <div class="orb orb-1"></div>
         <div class="orb orb-2"></div>
         <div class="orb orb-3"></div>
 
-
-        <!-- Pequenos reflexos -->
-
         <div class="light light-1"></div>
         <div class="light light-2"></div>
 
-
-        <!-- Partículas estáticas/animadas -->
-
         <div class="particles">
-
             <span class="particle p1"></span>
             <span class="particle p2"></span>
             <span class="particle p3"></span>
@@ -81,32 +55,23 @@
             <span class="particle p6"></span>
             <span class="particle p7"></span>
             <span class="particle p8"></span>
-
         </div>
 
     </div>
 
 
-
-    <!-- =====================================================
+    <!-- =========================
          APLICAÇÃO
-    ====================================================== -->
+    ========================== -->
 
     <main class="app">
 
         <section class="glass-card">
 
-            <!-- Reflexo superior -->
-
-            <div
-                class="glass-highlight"
-                aria-hidden="true"
-            ></div>
+            <div class="glass-highlight"></div>
 
 
-            <!-- =================================================
-                 ÍCONE SVG
-            ================================================== -->
+            <!-- ÍCONE -->
 
             <div class="icon">
 
@@ -114,10 +79,7 @@
                     viewBox="0 0 64 64"
                     width="34"
                     height="34"
-                    aria-hidden="true"
                 >
-
-                    <!-- envelope -->
 
                     <rect
                         x="8"
@@ -125,12 +87,10 @@
                         width="48"
                         height="34"
                         rx="8"
-                        fill="rgba(255,255,255,0.13)"
-                        stroke="rgba(255,255,255,0.88)"
+                        fill="rgba(255,255,255,0.08)"
+                        stroke="rgba(255,255,255,0.9)"
                         stroke-width="2"
                     />
-
-                    <!-- abertura -->
 
                     <path
                         d="M10 20L32 37L54 20"
@@ -141,8 +101,6 @@
                         stroke-linejoin="round"
                     />
 
-                    <!-- coração -->
-
                     <path
                         class="heart"
                         d="M32 43
@@ -152,7 +110,7 @@
                            L34.5 25
                            C38 21 44 23 44 28
                            C44 35 35 40 32 43Z"
-                        fill="rgba(255,255,255,0.9)"
+                        fill="rgba(255,255,255,0.92)"
                     />
 
                 </svg>
@@ -160,9 +118,7 @@
             </div>
 
 
-            <!-- =================================================
-                 CABEÇALHO
-            ================================================== -->
+            <!-- CABEÇALHO -->
 
             <span class="eyebrow">
                 UMA MENSAGEM SECRETA
@@ -179,16 +135,11 @@
             </p>
 
 
-            <!-- =================================================
-                 FORMULÁRIO
-            ================================================== -->
+            <!-- FORMULÁRIO -->
 
-            <form
-                id="letterForm"
-                autocomplete="off"
-            >
+            <form id="letterForm" autocomplete="off">
 
-                <!-- Destinatário -->
+                <!-- DESTINATÁRIO -->
 
                 <div class="field">
 
@@ -196,20 +147,26 @@
                         Para quem é?
                     </label>
 
-                    <input
-                        id="name"
-                        type="text"
-                        placeholder="Nome ou apelido"
-                        maxlength="40"
-                        autocomplete="off"
-                        enterkeyhint="next"
-                        required
-                    >
+                    <div class="liquid-input">
+
+                        <div class="input-shine"></div>
+
+                        <input
+                            id="name"
+                            type="text"
+                            placeholder="Nome ou apelido"
+                            maxlength="40"
+                            autocomplete="off"
+                            enterkeyhint="next"
+                            required
+                        >
+
+                    </div>
 
                 </div>
 
 
-                <!-- Mensagem -->
+                <!-- CARTA -->
 
                 <div class="field message-field">
 
@@ -217,22 +174,28 @@
                         Sua carta
                     </label>
 
-                    <textarea
-                        id="message"
-                        placeholder="Escreva algo que você nunca teve coragem de dizer..."
-                        maxlength="500"
-                        enterkeyhint="done"
-                        required
-                    ></textarea>
+                    <div class="liquid-input textarea-container">
 
-                    <div class="counter">
-                        <span id="counter">0</span>/500
+                        <div class="input-shine"></div>
+
+                        <textarea
+                            id="message"
+                            placeholder="Escreva algo que você nunca teve coragem de dizer..."
+                            maxlength="500"
+                            enterkeyhint="done"
+                            required
+                        ></textarea>
+
+                        <div class="counter">
+                            <span id="counter">0</span>/500
+                        </div>
+
                     </div>
 
                 </div>
 
 
-                <!-- Anonimato -->
+                <!-- ANONIMATO -->
 
                 <div class="secret-option">
 
@@ -257,14 +220,20 @@
                             checked
                         >
 
-                        <span></span>
+                        <span class="switch-glass">
+
+                            <span class="switch-reflection"></span>
+
+                            <span class="switch-knob"></span>
+
+                        </span>
 
                     </label>
 
                 </div>
 
 
-                <!-- Botão -->
+                <!-- BOTÃO -->
 
                 <button
                     type="submit"
@@ -272,14 +241,13 @@
                     id="sendButton"
                 >
 
+                    <span class="button-reflection"></span>
+
                     <span class="button-label">
                         Enviar carta
                     </span>
 
-                    <span
-                        class="arrow"
-                        aria-hidden="true"
-                    >
+                    <span class="arrow">
 
                         <svg
                             viewBox="0 0 24 24"
@@ -322,10 +290,9 @@
     </main>
 
 
-
-    <!-- =====================================================
-         MODAL
-    ====================================================== -->
+    <!-- =========================
+         SUCESSO
+    ========================== -->
 
     <div
         class="success-overlay"
@@ -333,14 +300,7 @@
         aria-hidden="true"
     >
 
-        <div
-            class="success-card"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="successTitle"
-        >
-
-            <!-- SVG de sucesso -->
+        <div class="success-card">
 
             <div class="success-icon">
 
@@ -348,7 +308,6 @@
                     viewBox="0 0 64 64"
                     width="40"
                     height="40"
-                    aria-hidden="true"
                 >
 
                     <circle
@@ -374,7 +333,7 @@
             </div>
 
 
-            <h2 id="successTitle">
+            <h2>
                 Carta enviada.
             </h2>
 
