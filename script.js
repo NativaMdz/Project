@@ -1,88 +1,258 @@
-const form = document.getElementById("letterForm");
+"use strict";
 
-const message = document.getElementById("message");
-const counter = document.getElementById("counter");
+/* ==========================================
+   ELEMENTOS
+========================================== */
 
-const successOverlay = document.getElementById("successOverlay");
-const closeSuccess = document.getElementById("closeSuccess");
+const form =
+    document.getElementById("letterForm");
+
+const nameInput =
+    document.getElementById("name");
+
+const messageInput =
+    document.getElementById("message");
+
+const counter =
+    document.getElementById("counter");
+
+const sendButton =
+    document.getElementById("sendButton");
+
+const buttonLabel =
+    sendButton.querySelector(".button-label");
+
+const successOverlay =
+    document.getElementById("successOverlay");
+
+const closeSuccess =
+    document.getElementById("closeSuccess");
 
 
-// ========================================
-// CONTADOR DA CARTA
-// ========================================
+/* ==========================================
+   DETECÇÃO DE PERFORMANCE
+========================================== */
 
-message.addEventListener("input", () => {
-    counter.textContent = message.value.length;
-});
+function detectPerformance() {
 
+    const cores =
+        navigator.hardwareConcurrency || 8;
 
-// ========================================
-// ENVIO
-// ========================================
+    const memory =
+        navigator.deviceMemory || 8;
 
-form.addEventListener("submit", (event) => {
+    const reducedMotion =
+        window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+        ).matches;
 
-    event.preventDefault();
+    /*
+        Poucos núcleos + pouca memória
+        = modo econômico.
+    */
 
-    const name = document.getElementById("name").value.trim();
-    const text = message.value.trim();
+    if (
+        cores <= 4 ||
+        memory <= 4 ||
+        reducedMotion
+    ) {
 
-    if (!name || !text) {
-        return;
+        document.documentElement
+            .classList.add("low-performance");
+
     }
 
-    // Pequena simulação de envio
-    const button = form.querySelector(".send-button");
-    const buttonText = button.querySelector("span");
-
-    buttonText.textContent = "Enviando...";
-
-    button.disabled = true;
-
-    setTimeout(() => {
-
-        buttonText.textContent = "Enviada ✓";
-
-        successOverlay.classList.add("active");
-
-        button.disabled = false;
-
-        form.reset();
-
-        counter.textContent = "0";
-
-    }, 650);
-
-});
+}
 
 
-// ========================================
-// FECHAR MODAL
-// ========================================
+/* ==========================================
+   CONTADOR
+========================================== */
 
-closeSuccess.addEventListener("click", () => {
-    successOverlay.classList.remove("active");
-});
+function updateCounter() {
+
+    const length =
+        messageInput.value.length;
+
+    counter.textContent =
+        length;
+
+}
 
 
-// Fecha clicando fora
-successOverlay.addEventListener("click", (event) => {
-
-    if (event.target === successOverlay) {
-        successOverlay.classList.remove("active");
+messageInput.addEventListener(
+    "input",
+    updateCounter,
+    {
+        passive: true
     }
+);
 
-});
+
+/* ==========================================
+   MODAL
+========================================== */
+
+function openSuccess() {
+
+    successOverlay.classList.add("active");
+
+    successOverlay.setAttribute(
+        "aria-hidden",
+        "false"
+    );
+
+}
 
 
-// ========================================
-// ESC
-// ========================================
+function closeSuccessModal() {
 
-document.addEventListener("keydown", (event) => {
+    successOverlay.classList.remove(
+        "active"
+    );
 
-    if (event.key === "Escape") {
-        successOverlay.classList.remove("active");
+    successOverlay.setAttribute(
+        "aria-hidden",
+        "true"
+    );
+
+}
+
+
+/* ==========================================
+   ENVIO
+========================================== */
+
+form.addEventListener(
+    "submit",
+    function (event) {
+
+        event.preventDefault();
+
+        const name =
+            nameInput.value.trim();
+
+        const text =
+            messageInput.value.trim();
+
+
+        if (!name || !text) {
+
+            return;
+
+        }
+
+
+        /*
+            Impede múltiplos cliques.
+        */
+
+        sendButton.disabled =
+            true;
+
+
+        buttonLabel.textContent =
+            "Enviando...";
+
+
+        /*
+            Simulação de envio.
+
+            Futuramente podemos trocar
+            isso por Firebase/API.
+        */
+
+        window.setTimeout(
+            function () {
+
+                buttonLabel.textContent =
+                    "Enviada ✓";
+
+                openSuccess();
+
+
+                form.reset();
+
+                updateCounter();
+
+
+                /*
+                    Libera o botão depois
+                    da animação.
+                */
+
+                window.setTimeout(
+                    function () {
+
+                        sendButton.disabled =
+                            false;
+
+                        buttonLabel.textContent =
+                            "Enviar carta";
+
+                    },
+                    350
+                );
+
+            },
+            450
+        );
+
     }
+);
 
-});
+
+/* ==========================================
+   FECHAR MODAL
+========================================== */
+
+closeSuccess.addEventListener(
+    "click",
+    closeSuccessModal
+);
+
+
+successOverlay.addEventListener(
+    "click",
+    function (event) {
+
+        if (
+            event.target ===
+            successOverlay
+        ) {
+
+            closeSuccessModal();
+
+        }
+
+    }
+);
+
+
+/* ==========================================
+   TECLA ESC
+========================================== */
+
+document.addEventListener(
+    "keydown",
+    function (event) {
+
+        if (
+            event.key === "Escape"
+        ) {
+
+            closeSuccessModal();
+
+        }
+
+    }
+);
+
+
+/* ==========================================
+   INICIALIZAÇÃO
+========================================== */
+
+detectPerformance();
+
+updateCounter();
