@@ -1,8 +1,9 @@
 "use strict";
 
-/* ==========================================
+
+/* =========================================================
    ELEMENTOS
-========================================== */
+========================================================= */
 
 const form =
     document.getElementById("letterForm");
@@ -29,9 +30,9 @@ const closeSuccess =
     document.getElementById("closeSuccess");
 
 
-/* ==========================================
+/* =========================================================
    DETECÇÃO DE PERFORMANCE
-========================================== */
+========================================================= */
 
 function detectPerformance() {
 
@@ -46,9 +47,10 @@ function detectPerformance() {
             "(prefers-reduced-motion: reduce)"
         ).matches;
 
+
     /*
-        Poucos núcleos + pouca memória
-        = modo econômico.
+        Ativa automaticamente uma versão
+        mais econômica em aparelhos modestos.
     */
 
     if (
@@ -65,17 +67,14 @@ function detectPerformance() {
 }
 
 
-/* ==========================================
+/* =========================================================
    CONTADOR
-========================================== */
+========================================================= */
 
 function updateCounter() {
 
-    const length =
-        messageInput.value.length;
-
     counter.textContent =
-        length;
+        messageInput.value.length;
 
 }
 
@@ -89,13 +88,15 @@ messageInput.addEventListener(
 );
 
 
-/* ==========================================
+/* =========================================================
    MODAL
-========================================== */
+========================================================= */
 
 function openSuccess() {
 
-    successOverlay.classList.add("active");
+    successOverlay.classList.add(
+        "active"
+    );
 
     successOverlay.setAttribute(
         "aria-hidden",
@@ -119,15 +120,16 @@ function closeSuccessModal() {
 }
 
 
-/* ==========================================
+/* =========================================================
    ENVIO
-========================================== */
+========================================================= */
 
 form.addEventListener(
     "submit",
-    function (event) {
+    function(event) {
 
         event.preventDefault();
+
 
         const name =
             nameInput.value.trim();
@@ -136,34 +138,32 @@ form.addEventListener(
             messageInput.value.trim();
 
 
-        if (!name || !text) {
+        if (
+            !name ||
+            !text
+        ) {
 
             return;
 
         }
 
 
-        /*
-            Impede múltiplos cliques.
-        */
-
         sendButton.disabled =
             true;
-
 
         buttonLabel.textContent =
             "Enviando...";
 
 
         /*
-            Simulação de envio.
+            Simulação temporária.
 
-            Futuramente podemos trocar
-            isso por Firebase/API.
+            Posteriormente podemos substituir
+            por Firebase.
         */
 
         window.setTimeout(
-            function () {
+            function() {
 
                 buttonLabel.textContent =
                     "Enviada ✓";
@@ -176,13 +176,8 @@ form.addEventListener(
                 updateCounter();
 
 
-                /*
-                    Libera o botão depois
-                    da animação.
-                */
-
                 window.setTimeout(
-                    function () {
+                    function() {
 
                         sendButton.disabled =
                             false;
@@ -202,9 +197,9 @@ form.addEventListener(
 );
 
 
-/* ==========================================
+/* =========================================================
    FECHAR MODAL
-========================================== */
+========================================================= */
 
 closeSuccess.addEventListener(
     "click",
@@ -214,7 +209,7 @@ closeSuccess.addEventListener(
 
 successOverlay.addEventListener(
     "click",
-    function (event) {
+    function(event) {
 
         if (
             event.target ===
@@ -229,13 +224,13 @@ successOverlay.addEventListener(
 );
 
 
-/* ==========================================
-   TECLA ESC
-========================================== */
+/* =========================================================
+   ESC
+========================================================= */
 
 document.addEventListener(
     "keydown",
-    function (event) {
+    function(event) {
 
         if (
             event.key === "Escape"
@@ -249,9 +244,9 @@ document.addEventListener(
 );
 
 
-/* ==========================================
+/* =========================================================
    INICIALIZAÇÃO
-========================================== */
+========================================================= */
 
 detectPerformance();
 
