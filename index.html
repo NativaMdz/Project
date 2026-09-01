@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
 
@@ -11,11 +12,6 @@
     <meta
         name="theme-color"
         content="#090014"
-    >
-
-    <meta
-        name="mobile-web-app-capable"
-        content="yes"
     >
 
     <meta
@@ -41,44 +37,132 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
+
 <body>
 
-    <!-- =====================================
-         FUNDO
-    ====================================== -->
+    <!-- =====================================================
+         FUNDO LIQUID GLASS
+    ====================================================== -->
 
-    <div class="background" aria-hidden="true">
+    <div
+        class="background"
+        aria-hidden="true"
+    >
+
+        <!-- Aurora principal -->
+
+        <div class="aurora aurora-1"></div>
+        <div class="aurora aurora-2"></div>
+        <div class="aurora aurora-3"></div>
+
+
+        <!-- Luzes difusas -->
 
         <div class="orb orb-1"></div>
         <div class="orb orb-2"></div>
         <div class="orb orb-3"></div>
 
+
+        <!-- Pequenos reflexos -->
+
         <div class="light light-1"></div>
         <div class="light light-2"></div>
+
+
+        <!-- Partículas estáticas/animadas -->
+
+        <div class="particles">
+
+            <span class="particle p1"></span>
+            <span class="particle p2"></span>
+            <span class="particle p3"></span>
+            <span class="particle p4"></span>
+            <span class="particle p5"></span>
+            <span class="particle p6"></span>
+            <span class="particle p7"></span>
+            <span class="particle p8"></span>
+
+        </div>
 
     </div>
 
 
-    <!-- =====================================
+
+    <!-- =====================================================
          APLICAÇÃO
-    ====================================== -->
+    ====================================================== -->
 
     <main class="app">
 
         <section class="glass-card">
 
-            <!-- brilho interno -->
-            <div class="glass-highlight"></div>
+            <!-- Reflexo superior -->
+
+            <div
+                class="glass-highlight"
+                aria-hidden="true"
+            ></div>
 
 
-            <!-- Ícone -->
+            <!-- =================================================
+                 ÍCONE SVG
+            ================================================== -->
 
             <div class="icon">
-                💌
+
+                <svg
+                    viewBox="0 0 64 64"
+                    width="34"
+                    height="34"
+                    aria-hidden="true"
+                >
+
+                    <!-- envelope -->
+
+                    <rect
+                        x="8"
+                        y="15"
+                        width="48"
+                        height="34"
+                        rx="8"
+                        fill="rgba(255,255,255,0.13)"
+                        stroke="rgba(255,255,255,0.88)"
+                        stroke-width="2"
+                    />
+
+                    <!-- abertura -->
+
+                    <path
+                        d="M10 20L32 37L54 20"
+                        fill="none"
+                        stroke="rgba(255,255,255,0.82)"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+
+                    <!-- coração -->
+
+                    <path
+                        class="heart"
+                        d="M32 43
+                           C29 40 20 35 20 28
+                           C20 23 26 21 29.5 25
+                           L32 28
+                           L34.5 25
+                           C38 21 44 23 44 28
+                           C44 35 35 40 32 43Z"
+                        fill="rgba(255,255,255,0.9)"
+                    />
+
+                </svg>
+
             </div>
 
 
-            <!-- Título -->
+            <!-- =================================================
+                 CABEÇALHO
+            ================================================== -->
 
             <span class="eyebrow">
                 UMA MENSAGEM SECRETA
@@ -95,13 +179,16 @@
             </p>
 
 
-            <!-- =================================
+            <!-- =================================================
                  FORMULÁRIO
-            ================================== -->
+            ================================================== -->
 
-            <form id="letterForm" autocomplete="off">
+            <form
+                id="letterForm"
+                autocomplete="off"
+            >
 
-                <!-- Nome -->
+                <!-- Destinatário -->
 
                 <div class="field">
 
@@ -122,7 +209,7 @@
                 </div>
 
 
-                <!-- Carta -->
+                <!-- Mensagem -->
 
                 <div class="field message-field">
 
@@ -189,16 +276,42 @@
                         Enviar carta
                     </span>
 
-                    <span class="arrow">
-                        →
+                    <span
+                        class="arrow"
+                        aria-hidden="true"
+                    >
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            width="22"
+                            height="22"
+                        >
+
+                            <path
+                                d="M4 12H19"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                            />
+
+                            <path
+                                d="M14 7L19 12L14 17"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            />
+
+                        </svg>
+
                     </span>
 
                 </button>
 
             </form>
 
-
-            <!-- Footer -->
 
             <div class="footer">
                 Feito para sentimentos que não precisam de nome.
@@ -209,9 +322,10 @@
     </main>
 
 
-    <!-- =====================================
-         MODAL DE SUCESSO
-    ====================================== -->
+
+    <!-- =====================================================
+         MODAL
+    ====================================================== -->
 
     <div
         class="success-overlay"
@@ -226,9 +340,39 @@
             aria-labelledby="successTitle"
         >
 
+            <!-- SVG de sucesso -->
+
             <div class="success-icon">
-                ✨
+
+                <svg
+                    viewBox="0 0 64 64"
+                    width="40"
+                    height="40"
+                    aria-hidden="true"
+                >
+
+                    <circle
+                        cx="32"
+                        cy="32"
+                        r="23"
+                        fill="rgba(255,255,255,0.08)"
+                        stroke="rgba(255,255,255,0.8)"
+                        stroke-width="2"
+                    />
+
+                    <path
+                        d="M21 33L28 40L44 24"
+                        fill="none"
+                        stroke="white"
+                        stroke-width="3"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+
+                </svg>
+
             </div>
+
 
             <h2 id="successTitle">
                 Carta enviada.
@@ -239,6 +383,7 @@
                 Talvez alguém esteja prestes a descobrir
                 que existe uma pessoa pensando nela.
             </p>
+
 
             <button
                 type="button"
@@ -255,4 +400,5 @@
     <script src="script.js" defer></script>
 
 </body>
+
 </html>
