@@ -1,0 +1,647 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --glass: rgba(255, 255, 255, 0.14);
+    --glass-border: rgba(255, 255, 255, 0.28);
+    --text: #ffffff;
+    --muted: rgba(255, 255, 255, 0.64);
+    --accent: #ffffff;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    font-family: "Inter", sans-serif;
+    color: var(--text);
+    overflow-x: hidden;
+    background:
+        radial-gradient(
+            circle at 20% 10%,
+            #8b5cf6 0%,
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 90% 80%,
+            #2563eb 0%,
+            transparent 38%
+        ),
+        linear-gradient(
+            135deg,
+            #090014,
+            #111827 50%,
+            #020617
+        );
+}
+
+
+/* =========================================
+   FUNDO
+========================================= */
+
+.background {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.65;
+    will-change: transform;
+}
+
+.orb-1 {
+    width: 260px;
+    height: 260px;
+    background: #a855f7;
+    top: -80px;
+    left: -80px;
+    animation: floatOne 12s ease-in-out infinite alternate;
+}
+
+.orb-2 {
+    width: 220px;
+    height: 220px;
+    background: #3b82f6;
+    right: -70px;
+    top: 30%;
+    animation: floatTwo 15s ease-in-out infinite alternate;
+}
+
+.orb-3 {
+    width: 200px;
+    height: 200px;
+    background: #ec4899;
+    bottom: -80px;
+    left: 25%;
+    animation: floatThree 17s ease-in-out infinite alternate;
+}
+
+@keyframes floatOne {
+    from {
+        transform: translate3d(0, 0, 0);
+    }
+
+    to {
+        transform: translate3d(70px, 90px, 0);
+    }
+}
+
+@keyframes floatTwo {
+    from {
+        transform: translate3d(0, 0, 0);
+    }
+
+    to {
+        transform: translate3d(-80px, -60px, 0);
+    }
+}
+
+@keyframes floatThree {
+    from {
+        transform: translate3d(0, 0, 0);
+    }
+
+    to {
+        transform: translate3d(80px, -50px, 0);
+    }
+}
+
+
+/* =========================================
+   APP
+========================================= */
+
+.app {
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 28px 18px;
+}
+
+
+/* =========================================
+   LIQUID GLASS
+========================================= */
+
+.glass-card {
+    position: relative;
+    width: 100%;
+    max-width: 460px;
+
+    padding: 30px 22px 22px;
+
+    border-radius: 32px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,0.21),
+            rgba(255,255,255,0.07)
+        );
+
+    border: 1px solid var(--glass-border);
+
+    backdrop-filter: blur(28px) saturate(150%);
+    -webkit-backdrop-filter: blur(28px) saturate(150%);
+
+    box-shadow:
+        0 35px 80px rgba(0, 0, 0, 0.45),
+        inset 0 1px 1px rgba(255,255,255,0.45),
+        inset 0 -1px 1px rgba(255,255,255,0.08);
+
+    overflow: hidden;
+}
+
+
+/* brilho superior */
+
+.glass-card::before {
+    content: "";
+    position: absolute;
+
+    top: 0;
+    left: 8%;
+    width: 84%;
+    height: 1px;
+
+    background: rgba(255,255,255,0.8);
+
+    opacity: 0.7;
+}
+
+
+/* reflexo líquido */
+
+.glass-card::after {
+    content: "";
+
+    position: absolute;
+    width: 180px;
+    height: 180px;
+
+    top: -100px;
+    right: -70px;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,0.12);
+
+    filter: blur(25px);
+
+    pointer-events: none;
+}
+
+
+/* =========================================
+   ICON
+========================================= */
+
+.icon {
+    width: 62px;
+    height: 62px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 22px;
+
+    border-radius: 20px;
+
+    font-size: 28px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,0.28),
+            rgba(255,255,255,0.08)
+        );
+
+    border: 1px solid rgba(255,255,255,0.25);
+
+    box-shadow:
+        inset 0 1px 1px rgba(255,255,255,0.4),
+        0 12px 30px rgba(0,0,0,0.2);
+}
+
+
+/* =========================================
+   TEXTOS
+========================================= */
+
+.eyebrow {
+    display: block;
+
+    margin-bottom: 10px;
+
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.8px;
+
+    color: rgba(255,255,255,0.55);
+}
+
+h1 {
+    font-size: clamp(30px, 8vw, 42px);
+    line-height: 1.05;
+    letter-spacing: -1.7px;
+
+    margin-bottom: 15px;
+}
+
+.description {
+    color: var(--muted);
+
+    font-size: 14px;
+    line-height: 1.6;
+
+    margin-bottom: 26px;
+}
+
+
+/* =========================================
+   FORM
+========================================= */
+
+.field {
+    position: relative;
+    margin-bottom: 17px;
+}
+
+.field label {
+    display: block;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    margin-bottom: 8px;
+
+    color: rgba(255,255,255,0.75);
+}
+
+input,
+textarea {
+    width: 100%;
+
+    border: 1px solid rgba(255,255,255,0.14);
+
+    outline: none;
+
+    color: white;
+
+    background:
+        rgba(0,0,0,0.13);
+
+    border-radius: 17px;
+
+    padding: 15px 16px;
+
+    font-family: inherit;
+    font-size: 14px;
+
+    box-shadow:
+        inset 0 1px 1px rgba(255,255,255,0.07);
+
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+input {
+    height: 52px;
+}
+
+textarea {
+    min-height: 135px;
+    resize: none;
+    line-height: 1.5;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: rgba(255,255,255,0.36);
+}
+
+input:focus,
+textarea:focus {
+    border-color: rgba(255,255,255,0.45);
+
+    background:
+        rgba(255,255,255,0.08);
+
+    box-shadow:
+        0 0 0 3px rgba(255,255,255,0.06),
+        inset 0 1px 1px rgba(255,255,255,0.1);
+}
+
+
+/* contador */
+
+.counter {
+    position: absolute;
+
+    right: 13px;
+    bottom: 11px;
+
+    font-size: 10px;
+
+    color: rgba(255,255,255,0.35);
+}
+
+
+/* =========================================
+   SWITCH
+========================================= */
+
+.secret-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 15px 3px 20px;
+}
+
+.secret-option strong {
+    display: block;
+
+    font-size: 12px;
+    margin-bottom: 3px;
+}
+
+.secret-option small {
+    color: rgba(255,255,255,0.43);
+    font-size: 10px;
+}
+
+
+/* switch */
+
+.switch {
+    position: relative;
+
+    width: 48px;
+    height: 28px;
+}
+
+.switch input {
+    display: none;
+}
+
+.switch span {
+    position: absolute;
+    inset: 0;
+
+    border-radius: 30px;
+
+    background: rgba(255,255,255,0.13);
+
+    border: 1px solid rgba(255,255,255,0.18);
+
+    cursor: pointer;
+
+    transition: 0.25s ease;
+}
+
+.switch span::after {
+    content: "";
+
+    position: absolute;
+
+    width: 20px;
+    height: 20px;
+
+    top: 3px;
+    left: 3px;
+
+    border-radius: 50%;
+
+    background: white;
+
+    box-shadow:
+        0 3px 10px rgba(0,0,0,0.3);
+
+    transition: 0.25s ease;
+}
+
+.switch input:checked + span {
+    background: rgba(255,255,255,0.35);
+}
+
+.switch input:checked + span::after {
+    transform: translateX(20px);
+}
+
+
+/* =========================================
+   BOTÃO
+========================================= */
+
+.send-button {
+    width: 100%;
+    height: 56px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 18px;
+
+    border: 1px solid rgba(255,255,255,0.5);
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,0.95),
+            rgba(255,255,255,0.72)
+        );
+
+    color: #111827;
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 12px 28px rgba(0,0,0,0.25),
+        inset 0 1px 1px white;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.send-button .arrow {
+    font-size: 22px;
+}
+
+.send-button:active {
+    transform: scale(0.97);
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.footer {
+    text-align: center;
+
+    margin-top: 18px;
+
+    font-size: 9px;
+
+    color: rgba(255,255,255,0.3);
+}
+
+
+/* =========================================
+   SUCCESS
+========================================= */
+
+.success-overlay {
+    position: fixed;
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    background: rgba(0,0,0,0.35);
+
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition: 0.3s ease;
+
+    z-index: 20;
+}
+
+.success-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.success-card {
+    width: 100%;
+    max-width: 360px;
+
+    padding: 30px 24px;
+
+    border-radius: 28px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,0.22),
+            rgba(255,255,255,0.08)
+        );
+
+    border: 1px solid rgba(255,255,255,0.3);
+
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+
+    text-align: center;
+
+    box-shadow:
+        0 30px 70px rgba(0,0,0,0.45),
+        inset 0 1px 1px rgba(255,255,255,0.4);
+
+    transform: translateY(20px) scale(0.97);
+
+    transition: 0.35s ease;
+}
+
+.success-overlay.active .success-card {
+    transform: translateY(0) scale(1);
+}
+
+.success-icon {
+    font-size: 40px;
+    margin-bottom: 12px;
+}
+
+.success-card h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.success-card p {
+    color: rgba(255,255,255,0.62);
+
+    font-size: 13px;
+    line-height: 1.6;
+
+    margin-bottom: 22px;
+}
+
+.success-card button {
+    width: 100%;
+    height: 48px;
+
+    border: 0;
+    border-radius: 15px;
+
+    background: rgba(255,255,255,0.9);
+
+    font-family: inherit;
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+
+/* =========================================
+   PERFORMANCE / REDUCED MOTION
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+
+/* =========================================
+   TELAS MAIORES
+========================================= */
+
+@media (min-width: 700px) {
+
+    .app {
+        padding: 50px;
+    }
+
+    .glass-card {
+        padding: 38px 32px 25px;
+    }
+}
