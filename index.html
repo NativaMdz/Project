@@ -1,1075 +1,1286 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#100b12">
-<meta name="description" content="Sugar Rush Collection - Colecione corredoras, encontre cartas raras e monte sua coleção definitiva de Corrida Doce.">
-<title>Sugar Rush Collection</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0d0910">
+  <meta name="description" content="Sugar Rush Collection: descubra, colecione e desbloqueie corredoras raras.">
+  <title>Sugar Rush Collection</title>
 
-<style>
-/* =========================================================
-   SUGAR RUSH COLLECTION — ULTRA OPTIMIZED PERFORMANCE
-   ========================================================= */
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap");
 
-:root {
-    --bg: #100b12;
-    --text: #fff9fc;
-    --muted: rgba(255,255,255,.62);
-    --pink: #ff5ca8;
-    --pink-light: #ffb0d4;
-    --glass: rgba(255,255,255,.075);
-    --glass-strong: rgba(255,255,255,.11);
-    --border: rgba(255,255,255,.13);
-    --radius-xl: 28px;
-    --radius-lg: 22px;
-    --radius-md: 17px;
-    --nav-height: 76px;
-    --ease-out-fluid: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    --safe-top: env(safe-area-inset-top, 0px);
-    --safe-bottom: env(safe-area-inset-bottom, 0px);
-}
+    :root {
+      --bg: #0d0910;
+      --surface: rgba(255, 255, 255, .07);
+      --surface-strong: rgba(255, 255, 255, .11);
+      --line: rgba(255, 255, 255, .13);
+      --text: #fff8fc;
+      --muted: rgba(255, 248, 252, .62);
+      --soft: rgba(255, 248, 252, .42);
+      --pink: #ff559f;
+      --pink-light: #ffacd2;
+      --violet: #9b6cff;
+      --gold: #ffc85a;
+      --danger: #ff789e;
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --nav-height: 74px;
+      --ease: cubic-bezier(.22, .7, .2, 1);
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
 
-/* RESET & BASE */
-*, *::before, *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
 
-html {
-    background: var(--bg);
-    color-scheme: dark;
-    scroll-behavior: smooth;
-    -webkit-text-size-adjust: 100%;
-    -webkit-tap-highlight-color: transparent;
-}
+    html {
+      background: var(--bg);
+      color-scheme: dark;
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+      -webkit-tap-highlight-color: transparent;
+    }
 
-body {
-    min-height: 100dvh;
-    overflow-x: hidden;
-    font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    color: var(--text);
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-    font-display: swap;
-    /* CORREÇÃO AQUI: removidos transform, perspective e backface-visibility 
-       para não quebrar o containing block do position: fixed do modal. */
-}
-
-button {
-    border: 0;
-    color: inherit;
-    font: inherit;
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
-    touch-action: manipulation;
-}
-
-img {
-    display: block;
-    max-width: 100%;
-    height: auto;
-    /* Critical image performance */
-    content-visibility: auto;
-    contain-intrinsic-size: 200px 278px;
-}
-
-/* PERFORMANCE OPTIMIZATIONS */
-.gpu-accelerated {
-    transform: translateZ(0);
-    will-change: transform;
-    backface-visibility: hidden;
-}
-
-/* BACKGROUND - SIMPLIFIED FOR PERFORMANCE */
-.background {
-    position: fixed;
-    inset: 0;
-    overflow: hidden;
-    pointer-events: none;
-    z-index: -10;
-    background:
-        radial-gradient(circle at 15% 12%, rgba(255,92,168,.15), transparent 30%),
-        radial-gradient(circle at 90% 72%, rgba(177,85,255,.10), transparent 32%),
-        radial-gradient(circle at 50% 100%, rgba(255,146,207,.07), transparent 35%),
+    body {
+      min-width: 320px;
+      min-height: 100dvh;
+      margin: 0;
+      overflow-x: hidden;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 8% 0%, rgba(255, 85, 159, .18), transparent 28rem),
+        radial-gradient(circle at 100% 42%, rgba(119, 72, 255, .13), transparent 25rem),
         var(--bg);
-    contain: strict;
-}
-
-.glow {
-    position: absolute;
-    width: 260px;
-    height: 260px;
-    border-radius: 50%;
-    filter: blur(80px);
-    opacity: .26;
-    will-change: transform;
-    animation: glowMove 15s var(--ease-out-fluid) infinite alternate;
-    contain: strict;
-    /* Reduce blur for better performance */
-    transform: translateZ(0);
-}
-
-.glow.one { left: -130px; top: 12%; background: #ff3e9c; }
-.glow.two { right: -130px; top: 42%; background: #9b4cff; animation-delay: -5s; }
-.glow.three { left: 25%; bottom: -180px; background: #ff79bd; animation-delay: -10s; }
-
-@keyframes glowMove {
-    from { transform: translate3d(0,0,0) scale(1); }
-    to { transform: translate3d(35px,-25px,0) scale(1.1); }
-}
-
-/* PARTICLES - REDUCED FOR PERFORMANCE */
-.particles { 
-    position: absolute; 
-    inset: 0; 
-    contain: strict;
-    /* Disable particles on mobile for better performance */
-    display: none;
-}
-
-@media (min-width: 768px) {
-    .particles {
-        display: block;
+      font-family: "DM Sans", sans-serif;
+      -webkit-font-smoothing: antialiased;
     }
-}
 
-.particle {
-    position: absolute;
-    width: 3px;
-    height: 3px;
-    border-radius: 1px;
-    background: rgba(255,255,255,.55);
-    opacity: .25;
-    animation: particleMove var(--duration, 10s) var(--ease-out-fluid) infinite alternate;
-    animation-delay: var(--delay, 0s);
-    will-change: transform, opacity;
-    contain: strict;
-}
-
-@keyframes particleMove {
-    0% { transform: translate3d(0,0,0) rotate(0); opacity: .12; }
-    50% { opacity: .4; }
-    100% { transform: translate3d(var(--x, 0), var(--y, 0), 0) rotate(90deg); opacity: .08; }
-}
-
-/* APP LAYOUT */
-.app {
-    width: min(100%, 620px);
-    min-height: 100dvh;
-    margin: auto;
-    padding: calc(12px + var(--safe-top)) 16px calc(var(--nav-height) + 35px + var(--safe-bottom));
-}
-
-/* GLASS EFFECT - OPTIMIZED */
-.glass {
-    position: relative;
-    background: linear-gradient(135deg, rgba(255,255,255,.105), rgba(255,255,255,.035));
-    border: 1px solid var(--border);
-    box-shadow: 0 18px 55px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.12);
-    backdrop-filter: blur(18px) saturate(135%);
-    -webkit-backdrop-filter: blur(18px) saturate(135%);
-    contain: layout paint;
-}
-
-.glass::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    border-radius: inherit;
-    background: linear-gradient(115deg, rgba(255,255,255,.09), transparent 30%, transparent 70%, rgba(255,255,255,.025));
-}
-
-/* HEADER */
-.header {
-    position: sticky;
-    top: calc(12px + var(--safe-top));
-    z-index: 50;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 11px 12px;
-    margin-bottom: 24px;
-    border-radius: var(--radius-lg);
-}
-
-.brand { 
-    display: flex; 
-    align-items: center; 
-    gap: 10px; 
-}
-
-.logo {
-    width: 39px;
-    height: 39px;
-    display: grid;
-    place-items: center;
-    border-radius: 13px;
-    background: linear-gradient(145deg, rgba(255,255,255,.16), rgba(255,255,255,.04));
-    border: 1px solid rgba(255,255,255,.13);
-}
-
-.logo svg { 
-    width: 21px; 
-    height: 21px; 
-    fill: none; 
-    stroke: var(--pink-light); 
-    stroke-width: 1.7; 
-    stroke-linecap: round; 
-    stroke-linejoin: round; 
-}
-
-.brand-title { 
-    font-size: 14px; 
-    font-weight: 800; 
-    letter-spacing: -.02em; 
-}
-
-.brand-subtitle { 
-    margin-top: 2px; 
-    color: var(--muted); 
-    font-size: 9px; 
-    letter-spacing: .14em; 
-    text-transform: uppercase; 
-}
-
-.profile-button {
-    position: relative;
-    width: 40px;
-    height: 40px;
-    display: grid;
-    place-items: center;
-    border-radius: 13px;
-    background: rgba(255,255,255,.055);
-    border: 1px solid rgba(255,255,255,.11);
-    transition: transform .18s var(--ease-out-fluid);
-}
-
-.profile-button:active { 
-    transform: scale(.92); 
-}
-
-.profile-button svg { 
-    width: 19px; 
-    height: 19px; 
-    fill: none; 
-    stroke: currentColor; 
-    stroke-width: 1.6; 
-    stroke-linecap: round; 
-    stroke-linejoin: round; 
-}
-
-/* SPA SECTIONS */
-.tab-section {
-    display: none;
-    opacity: 0;
-    transform: translate3d(0, 14px, 0);
-}
-
-.tab-section.active {
-    display: block;
-    animation: sectionFadeIn 0.4s var(--ease-out-fluid) forwards;
-}
-
-@keyframes sectionFadeIn {
-    to { 
-        opacity: 1; 
-        transform: translate3d(0, 0, 0); 
+    body::before {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      opacity: .035;
+      content: "";
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E");
     }
-}
 
-/* HERO */
-.hero { 
-    padding: 5px 4px 35px; 
-}
-
-.kicker { 
-    color: var(--pink-light); 
-    font-size: 10px; 
-    font-weight: 800; 
-    letter-spacing: .2em; 
-    text-transform: uppercase; 
-}
-
-.hero h1 { 
-    margin-top: 10px; 
-    font-size: clamp(42px, 12vw, 68px); 
-    line-height: .89; 
-    letter-spacing: -.075em; 
-}
-
-.hero h1 span {
-    display: block;
-    background: linear-gradient(90deg, #ffffff, #ffb0d4 55%, #ff5ca8);
-    color: transparent;
-    -webkit-background-clip: text;
-    background-clip: text;
-}
-
-.hero-description { 
-    max-width: 410px; 
-    margin-top: 18px; 
-    color: var(--muted); 
-    font-size: 14px; 
-    line-height: 1.6; 
-}
-
-.primary-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 9px;
-    min-height: 48px;
-    margin-top: 22px;
-    padding: 0 19px;
-    border-radius: 15px;
-    background: linear-gradient(135deg, #ff79ba, #e94191);
-    box-shadow: 0 12px 35px rgba(255,65,145,.22);
-    font-size: 13px;
-    font-weight: 800;
-    transition: transform .18s var(--ease-out-fluid), box-shadow .18s var(--ease-out-fluid);
-}
-
-.primary-button:hover {
-    box-shadow: 0 15px 40px rgba(255,65,145,.35);
-}
-
-.primary-button:active { 
-    transform: scale(.95); 
-}
-
-.primary-button svg { 
-    width: 17px; 
-    height: 17px; 
-    fill: none; 
-    stroke: currentColor; 
-    stroke-width: 1.8; 
-    stroke-linecap: round; 
-    stroke-linejoin: round; 
-}
-
-/* COLLECTION GRID & CARDS - OPTIMIZED */
-.collection-header { 
-    display: flex; 
-    align-items: end; 
-    justify-content: space-between; 
-    margin-bottom: 18px; 
-}
-
-.collection-title { 
-    font-size: 28px; 
-    letter-spacing: -.05em; 
-}
-
-.collection-count { 
-    padding: 8px 11px; 
-    border-radius: 12px; 
-    color: var(--muted); 
-    font-size: 11px; 
-}
-
-.collection-count strong { 
-    color: #fff; 
-    font-size: 14px; 
-}
-
-.card-grid { 
-    display: grid; 
-    grid-template-columns: repeat(2, minmax(0,1fr)); 
-    gap: 14px;
-    /* Performance optimization */
-    content-visibility: auto;
-    contain-intrinsic-size: 600px;
-}
-
-.card {
-    position: relative;
-    aspect-ratio: .72;
-    overflow: hidden;
-    isolation: isolate;
-    border-radius: 23px;
-    background: #19121b;
-    border: 1px solid rgba(255,255,255,.12);
-    box-shadow: 0 18px 35px rgba(0,0,0,.25);
-    cursor: pointer;
-    contain: layout paint style;
-    /* Remove heavy transitions for better performance */
-    transition: transform .2s var(--ease-out-fluid);
-}
-
-.card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 22px 40px rgba(0,0,0,.35);
-}
-
-.card:active { 
-    transform: scale(.95); 
-}
-
-.card-image { 
-    position: absolute; 
-    inset: 0; 
-    width: 100%; 
-    height: 100%; 
-    object-fit: cover; 
-    z-index: -3; 
-    opacity: .95;
-    /* Critical: Remove scale transition for performance */
-    transition: none;
-}
-
-.card:hover .card-image { 
-    /* Remove transform scale to improve performance */
-    transform: none;
-}
-
-.card-gradient { 
-    position: absolute; 
-    inset: 0; 
-    z-index: -2; 
-    background: linear-gradient(to bottom, rgba(0,0,0,.02) 20%, rgba(0,0,0,.10) 42%, rgba(7,4,8,.97) 100%); 
-}
-
-.card-top { 
-    position: absolute; 
-    top: 10px; 
-    left: 10px; 
-    right: 10px; 
-    display: flex; 
-    align-items: center; 
-    justify-content: space-between; 
-}
-
-.rarity { 
-    padding: 5px 8px; 
-    border-radius: 8px; 
-    background: rgba(8,5,10,.52); 
-    border: 1px solid rgba(255,255,255,.14); 
-    backdrop-filter: blur(10px); 
-    font-size: 7px; 
-    font-weight: 900; 
-    letter-spacing: .13em; 
-    text-transform: uppercase; 
-}
-
-.number { 
-    color: rgba(255,255,255,.48); 
-    font-size: 8px; 
-    font-weight: 700; 
-}
-
-.card-info { 
-    position: absolute; 
-    left: 13px; 
-    right: 13px; 
-    bottom: 13px; 
-}
-
-.card-name { 
-    font-size: 17px; 
-    font-weight: 900; 
-    line-height: .98; 
-    letter-spacing: -.045em; 
-    text-shadow: 0 2px 12px rgba(0,0,0,.55); 
-}
-
-.card-subtitle { 
-    margin-top: 5px; 
-    color: rgba(255,255,255,.57); 
-    font-size: 8px; 
-    font-weight: 600; 
-    letter-spacing: .12em; 
-    text-transform: uppercase; 
-}
-
-/* RARITY STYLES */
-.common { border-color: rgba(255,255,255,.12); }
-.uncommon { border-color: rgba(106,220,255,.34); }
-.rare { border-color: rgba(103,159,255,.43); box-shadow: 0 18px 40px rgba(55,120,255,.12); }
-.epic { border-color: rgba(213,103,255,.46); box-shadow: 0 18px 44px rgba(190,60,255,.15); }
-.legendary { border-color: rgba(255,194,70,.58); box-shadow: 0 18px 48px rgba(255,177,45,.17); }
-.mythic { border-color: rgba(255,88,174,.62); box-shadow: 0 18px 50px rgba(255,55,165,.20); }
-
-/* PACKS & PROFILE */
-.pack-container { 
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-    padding: 20px 0; 
-    text-align: center; 
-}
-
-.pack-box {
-    width: 220px;
-    height: 310px;
-    border-radius: var(--radius-lg);
-    background: linear-gradient(135deg, rgba(255,92,168,.25), rgba(155,76,255,.2));
-    border: 2px solid var(--pink-light);
-    box-shadow: 0 20px 50px rgba(255,92,168,.25);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 20px 0;
-    cursor: pointer;
-    transition: transform .3s var(--ease-out-fluid), box-shadow .3s var(--ease-out-fluid);
-}
-
-.pack-box:hover { 
-    transform: translateY(-6px) scale(1.02); 
-    box-shadow: 0 25px 60px rgba(255,92,168,.35);
-}
-
-.pack-box:active { 
-    transform: scale(0.96); 
-}
-
-.profile-card { 
-    padding: 20px; 
-    border-radius: var(--radius-lg); 
-    margin-top: 15px; 
-}
-
-.profile-stats { 
-    display: grid; 
-    grid-template-columns: repeat(2, 1fr); 
-    gap: 12px; 
-    margin-top: 15px; 
-}
-
-/* BOTTOM NAV */
-.bottom-nav {
-    position: fixed;
-    left: 50%;
-    bottom: calc(12px + var(--safe-bottom));
-    transform: translateX(-50%);
-    z-index: 100;
-    width: min(calc(100% - 24px), 420px);
-    min-height: var(--nav-height);
-    padding: 7px;
-    border-radius: 25px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    contain: layout paint;
-}
-
-.nav-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 4px;
-    border-radius: 17px;
-    background: transparent;
-    color: rgba(255,255,255,.42);
-    transition: background .2s var(--ease-out-fluid), color .2s var(--ease-out-fluid), transform .15s var(--ease-out-fluid);
-}
-
-.nav-button:active { 
-    transform: scale(0.94); 
-}
-
-.nav-button.active { 
-    color: #fff; 
-    background: rgba(255,255,255,.1); 
-}
-
-.nav-button svg { 
-    width: 20px; 
-    height: 20px; 
-    fill: none; 
-    stroke: currentColor; 
-    stroke-width: 1.6; 
-    stroke-linecap: round; 
-    stroke-linejoin: round; 
-}
-
-.nav-button span { 
-    font-size: 9px; 
-    font-weight: 700; 
-}
-
-/* MODAL SYSTEM CORRIGIDO */
-.modal {
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100dvh; /* Garante que usa a altura real da viewport do mobile */
-    z-index: 9999; /* Isola o modal acima de tudo */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 18px;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity .22s var(--ease-out-fluid), visibility .22s var(--ease-out-fluid);
-}
-
-.modal.open { 
-    opacity: 1; 
-    visibility: visible; 
-}
-
-.modal-background {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(5,3,7,.78);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-}
-
-.modal-panel {
-    position: relative;
-    z-index: 1; /* Garante que fica em cima do background do modal */
-    width: 100%;
-    max-width: 390px;
-    max-height: calc(100dvh - 36px); /* Respeita o padding interno (18px * 2) */
-    padding: 15px;
-    overflow-y: auto; /* Permite rolar internamente se for alto demais */
-    border-radius: 27px;
-    overscroll-behavior: contain; /* Bloqueia o arrasto/scroll vazar para o body */
-    
-    /* A animação original mantida (sem margins ou offsets manuais) */
-    transform: translate3d(0, 18px, 0) scale(.96);
-    transition: transform .25s var(--ease-out-fluid);
-}
-
-.modal.open .modal-panel { 
-    transform: translate3d(0, 0, 0) scale(1); 
-}
-
-.close {
-    position: absolute; 
-    top: 12px; 
-    right: 12px; 
-    z-index: 10; 
-    width: 38px; 
-    height: 38px;
-    display: grid; 
-    place-items: center; 
-    border-radius: 13px; 
-    background: rgba(0,0,0,.25); 
-    border: 1px solid rgba(255,255,255,.12);
-    transition: transform .18s var(--ease-out-fluid);
-}
-
-.close:active { 
-    transform: scale(.9); 
-}
-
-.close svg { 
-    width: 17px; 
-    height: 17px; 
-    fill: none; 
-    stroke: currentColor; 
-    stroke-width: 1.8; 
-    stroke-linecap: round; 
-}
-
-.modal-card { 
-    position: relative; 
-    aspect-ratio: .72; 
-    max-width: 340px; 
-    margin: auto; 
-    overflow: hidden; 
-    border-radius: 23px; 
-    background: #181018; 
-    border: 1px solid rgba(255,255,255,.13); 
-}
-
-.modal-card img { 
-    width: 100%; 
-    height: 100%; 
-    object-fit: cover; 
-}
-
-.modal-details { 
-    padding: 18px 4px 3px; 
-}
-
-.modal-details h2 { 
-    font-size: 24px; 
-    letter-spacing: -.05em; 
-}
-
-.modal-details p { 
-    margin-top: 7px; 
-    color: var(--muted); 
-    font-size: 13px; 
-    line-height: 1.55; 
-}
-
-.stats { 
-    display: grid; 
-    grid-template-columns: repeat(2, 1fr); 
-    gap: 8px; 
-    margin-top: 15px; 
-}
-
-.stat { 
-    padding: 11px; 
-    border-radius: 14px; 
-    background: rgba(255,255,255,.045); 
-    border: 1px solid rgba(255,255,255,.07); 
-}
-
-.stat-label { 
-    display: block; 
-    color: rgba(255,255,255,.43); 
-    font-size: 8px; 
-    font-weight: 700; 
-    letter-spacing: .12em; 
-    text-transform: uppercase; 
-}
-
-.stat-value { 
-    display: block; 
-    margin-top: 3px; 
-    font-size: 17px; 
-    font-weight: 800; 
-}
-
-@media (min-width: 700px) {
-    .app { 
-        padding-left: 24px; 
-        padding-right: 24px; 
+    button,
+    input,
+    select {
+      color: inherit;
+      font: inherit;
     }
-    .card-grid { 
-        grid-template-columns: repeat(3, minmax(0,1fr)); 
-    }
-}
 
-@media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after { 
-        animation-duration: .01ms !important; 
-        transition-duration: .01ms !important; 
+    button {
+      border: 0;
+      cursor: pointer;
+      touch-action: manipulation;
     }
-}
-</style>
+
+    button:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    [role="button"]:focus-visible {
+      outline: 3px solid var(--pink-light);
+      outline-offset: 3px;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .app {
+      width: min(100% - 32px, 760px);
+      min-height: 100dvh;
+      margin: auto;
+      padding: calc(14px + var(--safe-top)) 0 calc(var(--nav-height) + 42px + var(--safe-bottom));
+    }
+
+    .glass {
+      border: 1px solid var(--line);
+      background: linear-gradient(135deg, rgba(255,255,255,.105), rgba(255,255,255,.035));
+      box-shadow:
+        0 20px 60px rgba(0, 0, 0, .23),
+        inset 0 1px rgba(255,255,255,.12);
+      backdrop-filter: blur(14px) saturate(125%);
+      -webkit-backdrop-filter: blur(14px) saturate(125%);
+    }
+
+    .header {
+      position: sticky;
+      top: calc(14px + var(--safe-top));
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 62px;
+      margin-bottom: 34px;
+      padding: 10px 12px;
+      border-radius: var(--radius-md);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo {
+      display: grid;
+      width: 40px;
+      height: 40px;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 13px;
+      background: linear-gradient(145deg, rgba(255,255,255,.17), rgba(255,255,255,.04));
+    }
+
+    .logo svg {
+      width: 22px;
+      fill: none;
+      stroke: var(--pink-light);
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 1.7;
+    }
+
+    .brand-title {
+      font-family: "Syne", sans-serif;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .brand-subtitle {
+      margin-top: 2px;
+      color: var(--soft);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    .profile-button,
+    .icon-button {
+      display: grid;
+      width: 42px;
+      height: 42px;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      background: rgba(255,255,255,.06);
+      transition: transform .2s var(--ease), background .2s var(--ease);
+    }
+
+    .profile-button:hover,
+    .icon-button:hover {
+      background: var(--surface-strong);
+      transform: translateY(-2px);
+    }
+
+    svg {
+      fill: none;
+      stroke: currentColor;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 1.7;
+    }
+
+    .profile-button svg,
+    .icon-button svg {
+      width: 19px;
+    }
+
+    .section {
+      display: none;
+    }
+
+    .section.active {
+      display: block;
+      animation: reveal .38s var(--ease) both;
+    }
+
+    @keyframes reveal {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero {
+      position: relative;
+      padding: 4px 4px 42px;
+    }
+
+    .eyebrow {
+      color: var(--pink-light);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin: 0;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: "Syne", sans-serif;
+    }
+
+    .hero h1 {
+      max-width: 640px;
+      margin-top: 12px;
+      font-size: clamp(3.2rem, 12vw, 6rem);
+      line-height: .86;
+      letter-spacing: -.08em;
+    }
+
+    .hero h1 span {
+      display: block;
+      color: transparent;
+      background: linear-gradient(90deg, #fff, var(--pink-light) 55%, var(--pink));
+      background-clip: text;
+      -webkit-background-clip: text;
+    }
+
+    .hero-description {
+      max-width: 460px;
+      margin-top: 20px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .primary-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 48px;
+      margin-top: 24px;
+      padding: 0 19px;
+      border-radius: 14px;
+      color: #fff;
+      background: linear-gradient(135deg, #ff76b8, #e93d8e);
+      box-shadow: 0 14px 32px rgba(255, 61, 142, .24);
+      font-size: 13px;
+      font-weight: 800;
+      transition: transform .2s var(--ease), box-shadow .2s var(--ease);
+    }
+
+    .primary-button:hover {
+      box-shadow: 0 18px 40px rgba(255, 61, 142, .36);
+      transform: translateY(-2px);
+    }
+
+    .primary-button:active {
+      transform: scale(.96);
+    }
+
+    .primary-button svg {
+      width: 17px;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .section-title {
+      margin-top: 5px;
+      font-size: clamp(1.75rem, 6vw, 2.25rem);
+      letter-spacing: -.06em;
+    }
+
+    .count {
+      flex: 0 0 auto;
+      padding: 8px 11px;
+      border-radius: 12px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .count strong {
+      color: #fff;
+      font-size: 15px;
+    }
+
+    .toolbar {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .search,
+    .filter {
+      min-height: 44px;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      color: var(--text);
+      background: rgba(255,255,255,.055);
+    }
+
+    .search {
+      width: 100%;
+      padding: 0 14px;
+    }
+
+    .filter {
+      padding: 0 10px;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .card {
+      position: relative;
+      min-width: 0;
+      aspect-ratio: .72;
+      overflow: hidden;
+      isolation: isolate;
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 22px;
+      background: #171018;
+      box-shadow: 0 18px 35px rgba(0,0,0,.26);
+      cursor: pointer;
+      transition: transform .22s var(--ease), box-shadow .22s var(--ease);
+    }
+
+    .card:hover {
+      box-shadow: 0 24px 42px rgba(0,0,0,.38);
+      transform: translateY(-5px);
+    }
+
+    .card:active {
+      transform: scale(.97);
+    }
+
+    .card-image {
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: .95;
+    }
+
+    .card::after {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      content: "";
+      background: linear-gradient(to bottom, transparent 28%, rgba(8,4,9,.06) 45%, rgba(8,4,9,.97));
+    }
+
+    .card-top {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      left: 10px;
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .rarity {
+      padding: 5px 8px;
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 8px;
+      background: rgba(8,5,10,.55);
+      color: #fff;
+      font-size: 8px;
+      font-weight: 900;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .number {
+      color: rgba(255,255,255,.52);
+      font-size: 9px;
+      font-weight: 800;
+    }
+
+    .card-info {
+      position: absolute;
+      right: 13px;
+      bottom: 13px;
+      left: 13px;
+    }
+
+    .card-name {
+      font-size: 17px;
+      line-height: .98;
+      letter-spacing: -.045em;
+    }
+
+    .card-subtitle {
+      margin-top: 6px;
+      color: rgba(255,255,255,.57);
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .common { border-color: rgba(255,255,255,.14); }
+    .rare { border-color: rgba(103,159,255,.5); }
+    .epic { border-color: rgba(213,103,255,.56); }
+    .legendary { border-color: rgba(255,194,70,.68); }
+    .mythic { border-color: rgba(255,88,174,.72); }
+
+    .empty {
+      grid-column: 1 / -1;
+      padding: 36px 20px;
+      border: 1px dashed var(--line);
+      border-radius: var(--radius-md);
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .pack-container {
+      display: grid;
+      justify-items: center;
+      padding: 18px 0;
+      text-align: center;
+    }
+
+    .pack-box {
+      position: relative;
+      display: grid;
+      width: min(100%, 260px);
+      aspect-ratio: .72;
+      place-items: center;
+      align-content: center;
+      border: 1px solid rgba(255,172,210,.7);
+      border-radius: 26px;
+      background:
+        radial-gradient(circle at 50% 28%, rgba(255,255,255,.2), transparent 12rem),
+        linear-gradient(145deg, rgba(255,85,159,.32), rgba(114,67,219,.22));
+      box-shadow: 0 25px 70px rgba(255,85,159,.2);
+      cursor: pointer;
+      transition: transform .3s var(--ease), box-shadow .3s var(--ease);
+    }
+
+    .pack-box:hover {
+      box-shadow: 0 30px 80px rgba(255,85,159,.34);
+      transform: translateY(-6px) rotate(-1deg);
+    }
+
+    .pack-box svg {
+      width: 58px;
+      color: var(--pink-light);
+      stroke-width: 1.3;
+    }
+
+    .pack-box h3 {
+      margin-top: 18px;
+      font-size: 20px;
+    }
+
+    .pack-box p {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .profile-card {
+      padding: 22px;
+      border-radius: var(--radius-lg);
+    }
+
+    .profile-card > p {
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .profile-stats,
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .stat {
+      padding: 13px;
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 14px;
+      background: rgba(255,255,255,.045);
+    }
+
+    .stat-label {
+      display: block;
+      color: var(--soft);
+      font-size: 8px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .stat-value {
+      display: block;
+      margin-top: 4px;
+      font-size: 18px;
+    }
+
+    .bottom-nav {
+      position: fixed;
+      right: 12px;
+      bottom: calc(12px + var(--safe-bottom));
+      left: 12px;
+      z-index: 30;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      width: min(calc(100% - 24px), 440px);
+      min-height: var(--nav-height);
+      margin: auto;
+      padding: 7px;
+      border-radius: 24px;
+    }
+
+    .nav-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      border-radius: 17px;
+      color: var(--soft);
+      background: transparent;
+      transition: background .2s var(--ease), color .2s var(--ease), transform .2s var(--ease);
+    }
+
+    .nav-button:hover,
+    .nav-button.active {
+      color: #fff;
+      background: rgba(255,255,255,.1);
+    }
+
+    .nav-button:active {
+      transform: scale(.94);
+    }
+
+    .nav-button svg {
+      width: 20px;
+    }
+
+    .nav-button span {
+      font-size: 9px;
+      font-weight: 800;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: grid;
+      padding: 18px;
+      place-items: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity .2s var(--ease), visibility .2s var(--ease);
+    }
+
+    .modal.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(5,3,7,.82);
+      backdrop-filter: blur(12px);
+    }
+
+    .modal-panel {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 410px);
+      max-height: calc(100dvh - 36px);
+      overflow: auto;
+      padding: 15px;
+      border-radius: 27px;
+      transform: translateY(16px) scale(.97);
+      transition: transform .25s var(--ease);
+    }
+
+    .modal.open .modal-panel {
+      transform: translateY(0) scale(1);
+    }
+
+    .modal-card {
+      position: relative;
+      aspect-ratio: .72;
+      max-width: 340px;
+      margin: auto;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+    }
+
+    .modal-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .modal-details {
+      padding: 18px 4px 4px;
+    }
+
+    .modal-details h2 {
+      margin-top: 5px;
+      font-size: 25px;
+      letter-spacing: -.06em;
+    }
+
+    .modal-details > p {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .close {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      z-index: 2;
+      display: grid;
+      width: 38px;
+      height: 38px;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 12px;
+      background: rgba(0,0,0,.35);
+    }
+
+    .close svg {
+      width: 17px;
+    }
+
+    .toast {
+      position: fixed;
+      right: 16px;
+      bottom: calc(var(--nav-height) + 28px + var(--safe-bottom));
+      left: 16px;
+      z-index: 120;
+      width: min(100% - 32px, 390px);
+      margin: auto;
+      padding: 14px 16px;
+      border: 1px solid rgba(255,172,210,.4);
+      border-radius: 14px;
+      color: #fff;
+      background: rgba(40,18,38,.94);
+      box-shadow: 0 16px 40px rgba(0,0,0,.35);
+      font-size: 13px;
+      font-weight: 700;
+      text-align: center;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(12px);
+      transition: opacity .2s var(--ease), transform .2s var(--ease);
+    }
+
+    .toast.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (min-width: 680px) {
+      .card-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .hero {
+        padding-top: 20px;
+      }
+
+      .toolbar {
+        grid-template-columns: 1fr 160px;
+      }
+    }
+
+    @media (max-width: 430px) {
+      .app {
+        width: min(100% - 24px, 760px);
+      }
+
+      .toolbar {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
 </head>
+
 <body>
-
-<div class="background gpu-accelerated">
-    <div class="glow one"></div>
-    <div class="glow two"></div>
-    <div class="glow three"></div>
-    <div class="particles" id="particles"></div>
-</div>
-
-<div class="app">
-
-    <!-- HEADER -->
-    <header class="header glass gpu-accelerated">
-        <div class="brand">
-            <div class="logo">
-                <svg viewBox="0 0 24 24"><path d="M5 18c2.2-4.5 5.3-7.5 9.1-9.1C16 8.1 18 7.4 20 7"/><path d="M5 20c3.4-.3 6.1-1.2 8.2-2.6"/><circle cx="18" cy="5.5" r="2"/></svg>
-            </div>
-            <div>
-                <div class="brand-title">Sugar Rush</div>
-                <div class="brand-subtitle">Collection</div>
-            </div>
+  <main class="app">
+    <header class="header glass">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path d="M5 18c2.2-4.5 5.3-7.5 9.1-9.1C16 8.1 18 7.4 20 7"/>
+            <path d="M5 20c3.4-.3 6.1-1.2 8.2-2.6"/>
+            <circle cx="18" cy="5.5" r="2"/>
+          </svg>
         </div>
 
-        <button class="profile-button" id="btnProfileHeader" aria-label="Perfil">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5.5 20c.7-3.4 2.9-5.2 6.5-5.2s5.8 1.8 6.5 5.2"/></svg>
-        </button>
+        <div>
+          <div class="brand-title">Sugar Rush</div>
+          <div class="brand-subtitle">Collection</div>
+        </div>
+      </div>
+
+      <button class="profile-button" data-section-link="profile" aria-label="Abrir perfil">
+        <svg viewBox="0 0 24 24">
+          <circle cx="12" cy="8" r="3.5"/>
+          <path d="M5.5 20c.7-3.4 2.9-5.2 6.5-5.2s5.8 1.8 6.5 5.2"/>
+        </svg>
+      </button>
     </header>
 
-    <!-- SECTION: COLLECTION -->
-    <section id="collection" class="tab-section active">
-        <div class="hero">
-            <div class="kicker">CORRIDA DOCE</div>
-            <h1>Colecione. <span>Corra.</span></h1>
-            <p class="hero-description">Descubra corredoras, encontre cartas raras e monte sua coleção definitiva de Corrida Doce.</p>
-            <button class="primary-button" id="goCollection">
-                <span>Abrir coleção</span>
-                <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
-            </button>
-        </div>
+    <section id="collection" class="section active" aria-labelledby="collection-title">
+      <div class="hero">
+        <div class="eyebrow">Corrida doce</div>
+        <h1>Colecione.<span>Corra.</span></h1>
+        <p class="hero-description">
+          Descubra corredoras, encontre cartas raras e monte sua coleção definitiva de Corrida Doce.
+        </p>
 
-        <div class="collection-header">
-            <div>
-                <div class="kicker">SUA COLEÇÃO</div>
-                <h2 class="collection-title">Corredoras</h2>
-            </div>
-            <div class="collection-count glass">
-                <strong id="owned">0</strong> <span>/ 24</span>
-            </div>
-        </div>
-
-        <div class="card-grid" id="cardGrid"></div>
-    </section>
-
-    <!-- SECTION: PACKS -->
-    <section id="packs" class="tab-section">
-        <div class="collection-header">
-            <div>
-                <div class="kicker">LOJA & PACOTES</div>
-                <h2 class="collection-title">Obter Cartas</h2>
-            </div>
-        </div>
-        <div class="pack-container">
-            <div class="pack-box glass gpu-accelerated" id="openPackBtn">
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--pink-light)" stroke-width="1.5"><path d="m4 8 8-4 8 4-8 4-8-4Z"/><path d="m4 8 8 4 8-4"/><path d="M4 8v8l8 4 8-4V8"/></svg>
-                <h3 style="margin-top:15px; font-size:18px;">Pacote Doce</h3>
-                <p style="color:var(--muted); font-size:12px; margin-top:5px;">Contém 3 cartas surpresa</p>
-            </div>
-            <button class="primary-button" id="buyPackAction">Abrir Pacote (100 Moedas)</button>
-        </div>
-    </section>
-
-    <!-- SECTION: PROFILE -->
-    <section id="profile" class="tab-section">
-        <div class="collection-header">
-            <div>
-                <div class="kicker">JOGADOR</div>
-                <h2 class="collection-title">Seu Perfil</h2>
-            </div>
-        </div>
-        <div class="profile-card glass">
-            <h3 style="font-size:20px;">Piloto #882</h3>
-            <p style="color:var(--muted); font-size:13px; margin-top:4px;">Nível 12 — Colecionador VIP</p>
-            
-            <div class="profile-stats">
-                <div class="stat"><span class="stat-label">Cartas</span><strong class="stat-value">2 / 24</strong></div>
-                <div class="stat"><span class="stat-label">Moedas</span><strong class="stat-value">1,450</strong></div>
-                <div class="stat"><span class="stat-label">Raras</span><strong class="stat-value">1</strong></div>
-                <div class="stat"><span class="stat-label">Míticas</span><strong class="stat-value">1</strong></div>
-            </div>
-        </div>
-    </section>
-
-</div>
-
-<!-- BOTTOM NAV -->
-<nav class="bottom-nav glass gpu-accelerated">
-    <button class="nav-button active" data-section="collection" aria-label="Coleção">
-        <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 8h8"/><path d="M8 12h8"/><path d="M8 16h5"/></svg>
-        <span>Coleção</span>
-    </button>
-
-    <button class="nav-button" data-section="packs" aria-label="Pacotes">
-        <svg viewBox="0 0 24 24"><path d="m4 8 8-4 8 4-8 4-8-4Z"/><path d="m4 8 8 4 8-4"/><path d="M4 8v8l8 4 8-4V8"/></svg>
-        <span>Pacotes</span>
-    </button>
-
-    <button class="nav-button" data-section="profile" aria-label="Perfil">
-        <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5.5 20c.7-3.4 2.9-5.2 6.5-5.2s5.8 1.8 6.5 5.2"/></svg>
-        <span>Perfil</span>
-    </button>
-</nav>
-
-<!-- MODAL -->
-<div class="modal" id="modal" aria-hidden="true">
-    <div class="modal-background" id="modalBackground"></div>
-    <div class="modal-panel glass">
-        <button class="close" id="closeModal" aria-label="Fechar">
-            <svg viewBox="0 0 24 24"><path d="m7 7 10 10"/><path d="m17 7-10 10"/></svg>
+        <button class="primary-button" data-section-link="collection">
+          Abrir coleção
+          <svg viewBox="0 0 24 24">
+            <path d="M5 12h14"/>
+            <path d="m13 6 6 6-6 6"/>
+          </svg>
         </button>
-        <div id="modalContent"></div>
+      </div>
+
+      <div class="section-heading">
+        <div>
+          <div class="eyebrow">Sua coleção</div>
+          <h2 id="collection-title" class="section-title">Corredoras</h2>
+        </div>
+
+        <div class="count glass">
+          <strong id="owned-count">0</strong> / 24
+        </div>
+      </div>
+
+      <div class="toolbar">
+        <input id="search-input" class="search" type="search" placeholder="Buscar corredora..." aria-label="Buscar corredora">
+        <select id="rarity-filter" class="filter" aria-label="Filtrar por raridade">
+          <option value="all">Todas as raridades</option>
+          <option value="common">Comum</option>
+          <option value="rare">Rara</option>
+          <option value="epic">Épica</option>
+          <option value="legendary">Lendária</option>
+          <option value="mythic">Mítica</option>
+        </select>
+      </div>
+
+      <div id="card-grid" class="card-grid"></div>
+    </section>
+
+    <section id="packs" class="section" aria-labelledby="packs-title">
+      <div class="section-heading">
+        <div>
+          <div class="eyebrow">Loja e pacotes</div>
+          <h2 id="packs-title" class="section-title">Obter cartas</h2>
+        </div>
+      </div>
+
+      <div class="pack-container">
+        <button id="pack-box" class="pack-box glass" aria-label="Abrir pacote doce">
+          <svg viewBox="0 0 24 24">
+            <path d="m4 8 8-4 8 4-8 4-8-4Z"/>
+            <path d="m4 8 8 4 8-4"/>
+            <path d="M4 8v8l8 4 8-4V8"/>
+          </svg>
+          <h3>Pacote Doce</h3>
+          <p>Contém 3 cartas surpresa</p>
+        </button>
+
+        <button id="buy-pack" class="primary-button">
+          Abrir pacote - 100 moedas
+        </button>
+      </div>
+    </section>
+
+    <section id="profile" class="section" aria-labelledby="profile-title">
+      <div class="section-heading">
+        <div>
+          <div class="eyebrow">Jogador</div>
+          <h2 id="profile-title" class="section-title">Seu perfil</h2>
+        </div>
+      </div>
+
+      <article class="profile-card glass">
+        <h3>Piloto #882</h3>
+        <p>Nível 12 - Colecionador VIP</p>
+
+        <div class="profile-stats">
+          <div class="stat">
+            <span class="stat-label">Cartas</span>
+            <strong id="profile-cards" class="stat-value">2 / 24</strong>
+          </div>
+
+          <div class="stat">
+            <span class="stat-label">Moedas</span>
+            <strong id="profile-coins" class="stat-value">1.450</strong>
+          </div>
+
+          <div class="stat">
+            <span class="stat-label">Raras</span>
+            <strong id="profile-rare" class="stat-value">1</strong>
+          </div>
+
+          <div class="stat">
+            <span class="stat-label">Míticas</span>
+            <strong id="profile-mythic" class="stat-value">1</strong>
+          </div>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <nav class="bottom-nav glass" aria-label="Navegação principal">
+    <button class="nav-button active" data-section-link="collection" aria-current="page">
+      <svg viewBox="0 0 24 24">
+        <rect x="4" y="4" width="16" height="16" rx="3"/>
+        <path d="M8 8h8M8 12h8M8 16h5"/>
+      </svg>
+      <span>Coleção</span>
+    </button>
+
+    <button class="nav-button" data-section-link="packs">
+      <svg viewBox="0 0 24 24">
+        <path d="m4 8 8-4 8 4-8 4-8-4Z"/>
+        <path d="m4 8 8 4 8-4"/>
+        <path d="M4 8v8l8 4 8-4V8"/>
+      </svg>
+      <span>Pacotes</span>
+    </button>
+
+    <button class="nav-button" data-section-link="profile">
+      <svg viewBox="0 0 24 24">
+        <circle cx="12" cy="8" r="3.5"/>
+        <path d="M5.5 20c.7-3.4 2.9-5.2 6.5-5.2s5.8 1.8 6.5 5.2"/>
+      </svg>
+      <span>Perfil</span>
+    </button>
+  </nav>
+
+  <div id="modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modal-title">
+    <div class="modal-backdrop" data-close-modal></div>
+
+    <div class="modal-panel glass">
+      <button class="close" id="close-modal" aria-label="Fechar detalhes">
+        <svg viewBox="0 0 24 24">
+          <path d="m7 7 10 10"/>
+          <path d="m17 7-10 10"/>
+        </svg>
+      </button>
+
+      <div id="modal-content"></div>
     </div>
-</div>
+  </div>
 
-<script>
-/* =========================================================
-   ULTRA OPTIMIZED JAVASCRIPT
-   ========================================================= */
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
-// Data Source
-const characters = [
-    { id: "taffyta", name: "Taffyta Caramelo", short: "Taffyta", rarity: "epic", rarityName: "Épica", number: "001", image: "https://files.catbox.moe/homg3m.webp", subtitle: "Corredora", description: "Uma das corredoras mais rápidas e habilidosas de Corrida Doce.", stats: { speed: 94, acceleration: 88, control: 91, drift: 86 }, owned: true },
-    { id: "vanellope", name: "Vanellope von Schweetz", short: "Vanellope", rarity: "mythic", rarityName: "Mítica", number: "002", image: "https://files.catbox.moe/r9aou2.webp", subtitle: "Corredora", description: "Uma corredora imprevisível com habilidades únicas.", stats: { speed: 97, acceleration: 96, control: 88, drift: 94 }, owned: true },
-    { id: "velusca", name: "Velusca", short: "Velusca", rarity: "rare", rarityName: "Rara", number: "003", image: "https://files.catbox.moe/v2mbvw.webp", subtitle: "Corredora", description: "Uma das corredoras que fazem parte de Corrida Doce.", stats: { speed: 88, acceleration: 84, control: 87, drift: 82 }, owned: false },
-    { id: "jubileena", name: "Jujubinha Bing-Bing", short: "Jujubinha", rarity: "legendary", rarityName: "Lendária", number: "004", image: "https://files.catbox.moe/rl575y.webp", subtitle: "Corredora", description: "Uma das personagens de destaque do universo de Corrida Doce.", stats: { speed: 91, acceleration: 93, control: 89, drift: 90 }, owned: false }
-];
+  <script>
+    const characters = [
+      {
+        id: "taffyta",
+        name: "Taffyta Caramelo",
+        short: "Taffyta",
+        rarity: "epic",
+        rarityName: "Épica",
+        number: "001",
+        image: "https://files.catbox.moe/homg3m.webp",
+        subtitle: "Corredora",
+        description: "Uma das corredoras mais rápidas e habilidosas de Corrida Doce.",
+        stats: { speed: 94, acceleration: 88, control: 91, drift: 86 },
+        owned: true
+      },
+      {
+        id: "vanellope",
+        name: "Vanellope von Schweetz",
+        short: "Vanellope",
+        rarity: "mythic",
+        rarityName: "Mítica",
+        number: "002",
+        image: "https://files.catbox.moe/r9aou2.webp",
+        subtitle: "Corredora",
+        description: "Uma corredora imprevisível com habilidades únicas.",
+        stats: { speed: 97, acceleration: 96, control: 88, drift: 94 },
+        owned: true
+      },
+      {
+        id: "velusca",
+        name: "Velusca",
+        short: "Velusca",
+        rarity: "rare",
+        rarityName: "Rara",
+        number: "003",
+        image: "https://files.catbox.moe/v2mbvw.webp",
+        subtitle: "Corredora",
+        description: "Uma das corredoras que fazem parte de Corrida Doce.",
+        stats: { speed: 88, acceleration: 84, control: 87, drift: 82 },
+        owned: false
+      },
+      {
+        id: "jubileena",
+        name: "Jujubinha Bing-Bing",
+        short: "Jujubinha",
+        rarity: "legendary",
+        rarityName: "Lendária",
+        number: "004",
+        image: "https://files.catbox.moe/rl575y.webp",
+        subtitle: "Corredora",
+        description: "Uma personagem de destaque do universo de Corrida Doce.",
+        stats: { speed: 91, acceleration: 93, control: 89, drift: 90 },
+        owned: false
+      }
+    ];
 
-// Cache DOM elements
-const DOM = {
-    sections: document.querySelectorAll('.tab-section'),
-    navButtons: document.querySelectorAll('.nav-button'),
-    grid: document.getElementById("cardGrid"),
-    owned: document.getElementById("owned"),
-    modal: document.getElementById("modal"),
-    modalContent: document.getElementById("modalContent"),
-    closeModal: document.getElementById("closeModal"),
-    modalBackground: document.getElementById("modalBackground"),
-    particles: document.getElementById("particles")
-};
+    const state = {
+      activeSection: "collection",
+      query: "",
+      rarity: "all",
+      coins: Number(localStorage.getItem("sugar-coins")) || 1450
+    };
 
-// SPA Navigation - Optimized
-function showSection(sectionId) {
-    const target = document.getElementById(sectionId);
-    if (!target) return;
+    const $ = (selector) => document.querySelector(selector);
 
-    DOM.sections.forEach(sec => {
-        sec.classList.remove('active');
-        sec.style.display = 'none';
-    });
+    const elements = {
+      grid: $("#card-grid"),
+      owned: $("#owned-count"),
+      search: $("#search-input"),
+      filter: $("#rarity-filter"),
+      modal: $("#modal"),
+      modalContent: $("#modal-content"),
+      closeModal: $("#close-modal"),
+      toast: $("#toast"),
+      coins: $("#profile-coins"),
+      profileCards: $("#profile-cards"),
+      profileRare: $("#profile-rare"),
+      profileMythic: $("#profile-mythic"),
+      packBox: $("#pack-box"),
+      buyPack: $("#buy-pack")
+    };
 
-    target.style.display = 'block';
-    target.classList.remove('active');
-    
-    requestAnimationFrame(() => {
-        target.classList.add('active');
-    });
+    let lastFocusedElement = null;
+    let toastTimer = null;
 
-    DOM.navButtons.forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.section === sectionId);
-    });
+    function saveCoins() {
+      localStorage.setItem("sugar-coins", String(state.coins));
+    }
 
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-}
+    function updateProfile() {
+      const owned = characters.filter((character) => character.owned);
+      const rare = owned.filter((character) => character.rarity === "rare").length;
+      const mythic = owned.filter((character) => character.rarity === "mythic").length;
 
-// Cards Creation - Using DocumentFragment
-function createCard(character) {
-    const card = document.createElement("article");
-    card.className = `card ${character.rarity}`;
-    card.setAttribute('role', 'button');
-    card.setAttribute('tabindex', '0');
-    card.setAttribute('aria-label', `Abrir detalhes de ${character.name}`);
-    
-    card.innerHTML = `
-        <img class="card-image" src="${character.image}" alt="${character.name}" loading="lazy" decoding="async" width="200" height="278">
-        <div class="card-gradient"></div>
-        <div class="card-top">
+      elements.owned.textContent = owned.length;
+      elements.coins.textContent = state.coins.toLocaleString("pt-BR");
+      elements.profileCards.textContent = `${owned.length} / 24`;
+      elements.profileRare.textContent = rare;
+      elements.profileMythic.textContent = mythic;
+    }
+
+    function filteredCharacters() {
+      const query = state.query.trim().toLocaleLowerCase("pt-BR");
+
+      return characters.filter((character) => {
+        const matchesQuery =
+          !query ||
+          character.name.toLocaleLowerCase("pt-BR").includes(query) ||
+          character.short.toLocaleLowerCase("pt-BR").includes(query);
+
+        const matchesRarity =
+          state.rarity === "all" || character.rarity === state.rarity;
+
+        return matchesQuery && matchesRarity;
+      });
+    }
+
+    function renderCards() {
+      const list = filteredCharacters();
+
+      if (!list.length) {
+        elements.grid.innerHTML = `
+          <div class="empty">
+            Nenhuma corredora encontrada para os filtros atuais.
+          </div>
+        `;
+        return;
+      }
+
+      const fragment = document.createDocumentFragment();
+
+      list.forEach((character) => {
+        const card = document.createElement("article");
+
+        card.className = `card ${character.rarity}`;
+        card.dataset.characterId = character.id;
+        card.tabIndex = 0;
+        card.setAttribute("role", "button");
+        card.setAttribute("aria-label", `Abrir detalhes de ${character.name}`);
+
+        card.innerHTML = `
+          <img
+            class="card-image"
+            src="${character.image}"
+            alt="${character.name}"
+            width="200"
+            height="278"
+            loading="lazy"
+            decoding="async">
+          <div class="card-top">
             <span class="rarity">${character.rarityName}</span>
             <span class="number">#${character.number}</span>
-        </div>
-        <div class="card-info">
+          </div>
+          <div class="card-info">
             <h3 class="card-name">${character.short}</h3>
             <p class="card-subtitle">${character.subtitle}</p>
-        </div>
-    `;
-    
-    card.addEventListener("click", () => openModal(character));
-    card.addEventListener("keydown", (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            openModal(character);
+          </div>
+        `;
+
+        fragment.appendChild(card);
+      });
+
+      elements.grid.replaceChildren(fragment);
+    }
+
+    function showSection(sectionId) {
+      const target = document.getElementById(sectionId);
+
+      if (!target || state.activeSection === sectionId) {
+        return;
+      }
+
+      state.activeSection = sectionId;
+
+      document.querySelectorAll(".section").forEach((section) => {
+        section.classList.toggle("active", section.id === sectionId);
+      });
+
+      document.querySelectorAll("[data-section-link]").forEach((button) => {
+        const isActive = button.dataset.sectionLink === sectionId;
+
+        if (button.classList.contains("nav-button")) {
+          button.classList.toggle("active", isActive);
+
+          if (isActive) {
+            button.setAttribute("aria-current", "page");
+          } else {
+            button.removeAttribute("aria-current");
+          }
         }
-    });
-    
-    return card;
-}
+      });
 
-// Batch DOM update
-const fragment = document.createDocumentFragment();
-characters.forEach(char => fragment.appendChild(createCard(char)));
-DOM.grid.replaceChildren(fragment);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
 
-// Update owned count
-const ownedCount = characters.filter(c => c.owned).length;
-DOM.owned.textContent = ownedCount;
+    function showToast(message) {
+      clearTimeout(toastTimer);
 
-// Modal Logic
-function openModal(character) {
-    DOM.modalContent.innerHTML = `
+      elements.toast.textContent = message;
+      elements.toast.classList.add("visible");
+
+      toastTimer = setTimeout(() => {
+        elements.toast.classList.remove("visible");
+      }, 3000);
+    }
+
+    function openModal(character) {
+      lastFocusedElement = document.activeElement;
+
+      const stats = [
+        ["Velocidade", character.stats.speed],
+        ["Aceleração", character.stats.acceleration],
+        ["Controle", character.stats.control],
+        ["Drift", character.stats.drift]
+      ];
+
+      elements.modalContent.innerHTML = `
         <div class="modal-card ${character.rarity}">
-            <img src="${character.image}" alt="${character.name}" width="340" height="472" loading="eager">
+          <img
+            src="${character.image}"
+            alt="${character.name}"
+            width="340"
+            height="472"
+            fetchpriority="high"
+            decoding="async">
         </div>
+
         <div class="modal-details">
-            <div class="kicker">${character.rarityName}</div>
-            <h2>${character.name}</h2>
-            <p>${character.description}</p>
-            <div class="stats">
-                <div class="stat"><span class="stat-label">Velocidade</span><strong class="stat-value">${character.stats.speed}</strong></div>
-                <div class="stat"><span class="stat-label">Aceleração</span><strong class="stat-value">${character.stats.acceleration}</strong></div>
-                <div class="stat"><span class="stat-label">Controle</span><strong class="stat-value">${character.stats.control}</strong></div>
-                <div class="stat"><span class="stat-label">Drift</span><strong class="stat-value">${character.stats.drift}</strong></div>
-            </div>
+          <div class="eyebrow">${character.rarityName}</div>
+          <h2 id="modal-title">${character.name}</h2>
+          <p>${character.description}</p>
+
+          <div class="stats">
+            ${stats.map(([label, value]) => `
+              <div class="stat">
+                <span class="stat-label">${label}</span>
+                <strong class="stat-value">${value}</strong>
+              </div>
+            `).join("")}
+          </div>
         </div>
-    `;
-    
-    DOM.modal.classList.add("open");
-    DOM.modal.setAttribute("aria-hidden", "false");
-    document.body.style.overflow = "hidden"; // Impede scroll do body
-    DOM.closeModal.focus();
-}
+      `;
 
-function closeModal() {
-    DOM.modal.classList.remove("open");
-    DOM.modal.setAttribute("aria-hidden", "true");
-    document.body.style.overflow = ""; // Restaura scroll do body
-}
-
-// Event Listeners
-DOM.closeModal.addEventListener("click", closeModal);
-DOM.modalBackground.addEventListener("click", closeModal);
-document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && DOM.modal.classList.contains("open")) {
-        closeModal();
+      elements.modal.classList.add("open");
+      elements.modal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+      elements.closeModal.focus();
     }
-});
 
-DOM.navButtons.forEach(btn => {
-    btn.addEventListener('click', () => showSection(btn.dataset.section));
-});
+    function closeModal() {
+      elements.modal.classList.remove("open");
+      elements.modal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
 
-document.getElementById("btnProfileHeader").addEventListener("click", () => showSection("profile"));
-document.getElementById("goCollection").addEventListener("click", () => {
-    document.getElementById("collection").scrollIntoView({ behavior: "smooth", block: "start" });
-});
-
-document.getElementById("buyPackAction").addEventListener("click", () => {
-    const packBox = document.getElementById("openPackBtn");
-    
-    packBox.style.transform = 'scale(0.95)';
-    setTimeout(() => {
-        packBox.style.transform = '';
-        alert("🎉 Pacote aberto! Você recebeu 3 novas cartas!");
-    }, 300);
-});
-
-// Particles Generator - Only on desktop
-function generateParticles() {
-    if (window.innerWidth < 768) return; // Skip on mobile
-    
-    const particleCount = 28;
-    const particleFragment = document.createDocumentFragment();
-
-    for (let i = 0; i < particleCount; i++) {
-        const particle = document.createElement("span");
-        particle.className = "particle";
-        particle.style.left = `${Math.random() * 100}%`;
-        particle.style.top = `${Math.random() * 100}%`;
-        particle.style.setProperty("--duration", `${7 + Math.random() * 8}s`);
-        particle.style.setProperty("--delay", `${Math.random() * -10}s`);
-        particle.style.setProperty("--x", `${-25 + Math.random() * 50}px`);
-        particle.style.setProperty("--y", `${-30 - Math.random() * 50}px`);
-        particleFragment.appendChild(particle);
+      if (lastFocusedElement && typeof lastFocusedElement.focus === "function") {
+        lastFocusedElement.focus();
+      }
     }
-    
-    DOM.particles.replaceChildren(particleFragment);
-}
 
-// Use requestIdleCallback for non-critical operations
-if ('requestIdleCallback' in window) {
-    requestIdleCallback(generateParticles);
-} else {
-    setTimeout(generateParticles, 200);
-}
+    function openPack() {
+      if (state.coins < 100) {
+        showToast("Você não possui moedas suficientes.");
+        return;
+      }
 
-// Preload critical images
-const criticalImages = characters.filter(c => c.owned).map(c => c.image);
-criticalImages.forEach(src => {
-    const img = new Image();
-    img.src = src;
-    img.decoding = 'async';
-});
+      state.coins -= 100;
+      saveCoins();
 
-// Performance monitoring
-if ('performance' in window && performance.getEntriesByType) {
-    window.addEventListener('load', () => {
-        const timing = performance.getEntriesByType('navigation')[0];
-        if (timing) {
-            console.log(`Page loaded in ${timing.domContentLoadedEventEnd}ms`);
+      const available = characters.filter((character) => !character.owned);
+
+      available.slice(0, 3).forEach((character) => {
+        character.owned = true;
+      });
+
+      elements.packBox.animate(
+        [
+          { transform: "scale(1) rotate(0deg)" },
+          { transform: "scale(.94) rotate(-2deg)" },
+          { transform: "scale(1.04) rotate(2deg)" },
+          { transform: "scale(1) rotate(0deg)" }
+        ],
+        {
+          duration: 500,
+          easing: "cubic-bezier(.2,.8,.2,1)"
         }
+      );
+
+      updateProfile();
+      renderCards();
+
+      showToast(
+        available.length
+          ? "Pacote aberto. Novas cartas adicionadas à coleção."
+          : "Pacote aberto. Você já possui todas as cartas disponíveis."
+      );
+    }
+
+    document.addEventListener("click", (event) => {
+      const sectionButton = event.target.closest("[data-section-link]");
+
+      if (sectionButton) {
+        showSection(sectionButton.dataset.sectionLink);
+        return;
+      }
+
+      const card = event.target.closest("[data-character-id]");
+
+      if (card) {
+        const character = characters.find(
+          (item) => item.id === card.dataset.characterId
+        );
+
+        if (character) {
+          openModal(character);
+        }
+      }
+
+      if (event.target.closest("[data-close-modal]")) {
+        closeModal();
+      }
     });
-}
-</script>
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && elements.modal.classList.contains("open")) {
+        closeModal();
+      }
+
+      const card = event.target.closest("[data-character-id]");
+
+      if (card && (event.key === "Enter" || event.key === " ")) {
+        event.preventDefault();
+
+        const character = characters.find(
+          (item) => item.id === card.dataset.characterId
+        );
+
+        if (character) {
+          openModal(character);
+        }
+      }
+    });
+
+    elements.closeModal.addEventListener("click", closeModal);
+    elements.buyPack.addEventListener("click", openPack);
+    elements.packBox.addEventListener("click", openPack);
+
+    elements.search.addEventListener("input", (event) => {
+      state.query = event.target.value;
+      renderCards();
+    });
+
+    elements.filter.addEventListener("change", (event) => {
+      state.rarity = event.target.value;
+      renderCards();
+    });
+
+    updateProfile();
+    renderCards();
+  </script>
 </body>
 </html>
